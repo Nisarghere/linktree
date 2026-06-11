@@ -1,0 +1,191 @@
+'use client'
+
+import Link from 'next/link';
+import React, { useState } from 'react'
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSearchParams } from 'next/navigation'
+
+
+const Generate = () => {
+
+    const searchParams = useSearchParams()
+
+    const [handle, sethandle] = useState(searchParams.get('handle' || ''))
+    const [pic, setpic] = useState('')
+    const [links, setlinks] = useState([{
+        url: "",
+        text: ""
+    }])
+
+    function updatelink(index, field, value) {
+        const updatedlink = [...links]
+        updatedlink[index][field] = value
+        setlinks(updatedlink)
+    }
+
+    const Addlink = () => {
+        const addlink = [...links, {
+            url: "",
+            text: ""
+        }]
+        setlinks(addlink)
+    }
+
+    const canaddlink = () => {
+        return links.every((link) => link.url.trim() !== '' && link.text.trim() !== '')
+    }
+
+    const cancreate = () => {
+        return (
+            handle?.trim() !== "" &&
+            pic?.trim() !== "" &&
+            links.every(
+                (link) => link?.url?.trim() && link?.text?.trim()
+            )
+        );
+    };
+
+    const createtree = async () => {
+        const payload = {
+            handle,
+            pic,
+            links
+        }
+        const resp = await fetch("/api/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        const data = await resp.json()
+
+        if (data.success) {
+            toast.success('linktree created')
+            sethandle('')
+            setpic('')
+            setlinks([{ url: '', text: '' }])
+        } else {
+            toast.error('linktree not created')
+        }
+    }
+
+    return (
+        <div className='min-h-screen grid grid-cols-2'>
+
+            <div className='flex flex-col justify-center items-center bg-[#225AC0]'>
+
+                <div className='bg-pink-400 p-5 rounded-2xl flex flex-col gap-5'>
+                    <div className='flex justify-between items-center'>
+                        <h2 className='font-bold text-3xl'>
+                            Welcome back
+                        </h2>
+                        <Link href={"/"} className=' px-4 py-1 underline bg-black text-white hover:text-black  hover:bg-black/50  transition rounded-full'> Home </Link>
+
+                    </div>
+
+                    <p className='text-gray-600'>
+                        Create your Linktree
+                    </p>
+
+                    <h2 className='font-semibold text-gray-600'>
+                        Step 1: Claim Your Handle
+                    </h2>
+
+                    <input
+                        value={handle}
+                        onChange={(e) => sethandle(e.target.value)}
+                        placeholder='Choose a handle'
+                        className='bg-white px-5 py-3 rounded-xl focus:outline-pink-400'
+                    />
+
+                    <h2 className='font-semibold text-gray-600'>
+                        Step 2: Add Links
+                    </h2>
+                    {links.map((link, i) => (
+                        <div key={i} className='flex gap-2'>
+
+                            <input
+                                value={link.url}
+                                onChange={(e) =>
+                                    updatelink(
+                                        i,
+                                        'url',
+                                        e.target.value
+                                    )
+                                }
+                                placeholder='Enter Link'
+                                className='bg-white px-3 py-2 rounded-xl focus:outline-pink-400'
+                            />
+
+                            <input
+                                value={link.text}
+                                onChange={(e) =>
+                                    updatelink(
+                                        i,
+                                        'text',
+                                        e.target.value
+                                    )
+                                }
+                                placeholder='Enter Link Text'
+                                className='bg-white px-3 py-2 rounded-xl focus:outline-pink-400'
+                            />
+
+                        </div>
+                    ))}
+
+
+
+                    <button
+                        disabled={!canaddlink()}
+                        onClick={Addlink} className={`px-3 py-2 font-semibold rounded-full text-white w-fit ${canaddlink() ? 'bg-blue-600' : 'bg-gray-500'}`}>
+                        + Add Link
+                    </button>
+
+                    <h2 className='font-semibold text-gray-600'>
+                        Step 3: Add Picture
+                    </h2>
+
+                    <input
+                        value={pic}
+                        onChange={(e) => setpic(e.target.value)}
+                        placeholder='Picture URL'
+                        className='bg-white px-5 py-3 rounded-xl focus:outline-pink-400'
+                    />
+
+                    <button
+                        disabled={!cancreate()}
+                        onClick={createtree}
+                        className={`px-4 py-2 rounded-full font-bold text-white mx-auto bg-black ${cancreate() ? "bg-black" : "bg-gray-500"}`}>
+                        Create your Linktree
+                    </button>
+
+                </div>
+            </div>
+
+            <div className='h-screen overflow-hidden'>
+                <img
+                    className='w-full h-full object-cover'
+                    src='https://linktr.ee/universal-login/assets/banner-login-desktop-D8selsDi.webp'
+                    alt='banner'
+                />
+            </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+        </div>
+    )
+}
+
+export default Generate
