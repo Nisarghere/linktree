@@ -4,11 +4,12 @@ export default async function Page({ params }) {
     const { handle } = await params;
 
     const links = await getLinksByHandle(handle);
+    console.log(links)
 
     if (!links || links.length === 0) {
         return <div>No profile found for @{handle}</div>;
     }
-
+    
     return (
         <div className="flex flex-col justify-center  items-center">
             <div className="flex flex-col items-center justify-center" style={{ marginTop: "20px" }}>

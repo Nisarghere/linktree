@@ -14,6 +14,7 @@ const page = () => {
     router.push(`/generate?handle=${text}`)
 
   }
+
   
   return (
     <div >

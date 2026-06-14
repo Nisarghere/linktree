@@ -4,20 +4,27 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 
 const Generate = () => {
 
+    const router = useRouter()
     const searchParams = useSearchParams()
 
-    const [handle, sethandle] = useState(searchParams.get('handle' || ''))
+    const [createhandle, setcreatehandle] = useState('')
+    const [handle, sethandle] = useState(searchParams.get('handle') || '')
     const [pic, setpic] = useState('')
     const [links, setlinks] = useState([{
         url: "",
         text: ""
     }])
 
+    function Addhandle() {
+        console.log(createhandle)
+        console.log('clicked')
+        router.push(`/${createhandle}`)
+    }
     function updatelink(index, field, value) {
         const updatedlink = [...links]
         updatedlink[index][field] = value
@@ -70,6 +77,7 @@ const Generate = () => {
         } else {
             toast.error('linktree not created')
         }
+        setcreatehandle(handle)
     }
 
     return (
@@ -90,9 +98,19 @@ const Generate = () => {
                         Create your Linktree
                     </p>
 
-                    <h2 className='font-semibold text-gray-600'>
-                        Step 1: Claim Your Handle
-                    </h2>
+                    <div className='flex justify-between items-center'>
+
+                        <h2 className='font-semibold text-gray-600'>
+                            Step 1: Claim Your Handle
+                        </h2>
+
+                        {
+                            createhandle &&
+                            <button
+                                onClick={Addhandle} className={`px-3 py-2 font-semibold rounded-full text-white w-fit ${canaddlink() ? 'bg-blue-600' : 'bg-red-500'}`}>
+                                {createhandle}
+                            </button>}
+                    </div>
 
                     <input
                         value={handle}

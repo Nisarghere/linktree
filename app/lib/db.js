@@ -12,7 +12,7 @@ export async function createLinktree(handle, pic, links) {
 
     await pool.query(
       "INSERT INTO links (handle, url, text) VALUES ($1, $2, $3)",
-      [handle, link.url.trim(), link.text.trim()]
+      [handle, link.url.trim(), link.text.trim(),pic]
     );
   }
 }
