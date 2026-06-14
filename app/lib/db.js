@@ -11,8 +11,8 @@ export async function createLinktree(handle, pic, links) {
     if (!link?.url || !link?.text) continue;
 
     await pool.query(
-      "INSERT INTO links (handle, url, text) VALUES ($1, $2, $3)",
-      [handle, link.url.trim(), link.text.trim(),pic]
+      "INSERT INTO links (handle, url, text, pic) VALUES ($1, $2, $3, $4)",
+      [handle, link.url.trim(), link.text.trim(), pic]
     );
   }
 }

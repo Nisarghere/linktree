@@ -68,6 +68,7 @@ const Generate = () => {
         });
 
         const data = await resp.json()
+        console.log(data)
 
         if (data.success) {
             toast.success('linktree created')
@@ -81,17 +82,22 @@ const Generate = () => {
     }
 
     return (
-        <div className='min-h-screen grid grid-cols-2'>
+        <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
 
-            <div className='flex flex-col justify-center items-center bg-[#225AC0]'>
+            <div className="flex flex-col justify-center items-center bg-[#225AC0] p-4 md:p-8">                {/* <div className='flex flex-col justify-center  bg-[#225AC0] items-cent22er min-h-screen min-w-screen md:flex md:flex-col md:items-center '> */}
 
-                <div className='bg-pink-400 p-5 rounded-2xl flex flex-col gap-5'>
-                    <div className='flex justify-between items-center'>
-                        <h2 className='font-bold text-3xl'>
+                <div className="bg-pink-400 p-5 rounded-2xl flex flex-col gap-5 w-full max-w-xl">
+                    <div className="flex flex-col gap-3 md:flex-row md:justify-between md:items-center">
+                        <h2 className="font-bold text-2xl md:text-3xl">
                             Welcome back
                         </h2>
-                        <Link href={"/"} className=' px-4 py-1 underline bg-black text-white hover:text-black  hover:bg-black/50  transition rounded-full'> Home </Link>
 
+                        <Link
+                            href="/"
+                            className="px-4 py-1  hover:bg-black bg-black/60 text-white rounded-full w-fit"
+                        >
+                            /
+                        </Link>
                     </div>
 
                     <p className='text-gray-600'>
@@ -107,8 +113,8 @@ const Generate = () => {
                         {
                             createhandle &&
                             <button
-                                onClick={Addhandle} className={`px-3 py-2 font-semibold rounded-full text-white w-fit ${canaddlink() ? 'bg-blue-600' : 'bg-red-500'}`}>
-                                {createhandle}
+                                onClick={Addhandle} className={`px-3 py-2 font-semibold underline rounded-full text-white w-fit bg-black textwhite font-semibold'}`}>
+                                @{createhandle}
                             </button>}
                     </div>
 
@@ -116,14 +122,14 @@ const Generate = () => {
                         value={handle}
                         onChange={(e) => sethandle(e.target.value)}
                         placeholder='Choose a handle'
-                        className='bg-white px-5 py-3 rounded-xl focus:outline-pink-400'
+                        className='bg-white px-5 py-3 rounded-xl w-full focus:outline-pink-400'
                     />
 
                     <h2 className='font-semibold text-gray-600'>
                         Step 2: Add Links
                     </h2>
                     {links.map((link, i) => (
-                        <div key={i} className='flex gap-2'>
+                        <div key={i} className='flex flex-col md:flex-row gap-2'>
 
                             <input
                                 value={link.url}
@@ -135,7 +141,7 @@ const Generate = () => {
                                     )
                                 }
                                 placeholder='Enter Link'
-                                className='bg-white px-3 py-2 rounded-xl focus:outline-pink-400'
+                                className='bg-white px-3 py-2 rounded-xl w-full focus:outline-pink-400'
                             />
 
                             <input
@@ -170,22 +176,22 @@ const Generate = () => {
                         value={pic}
                         onChange={(e) => setpic(e.target.value)}
                         placeholder='Picture URL'
-                        className='bg-white px-5 py-3 rounded-xl focus:outline-pink-400'
+                        className="bg-white px-5 py-3 rounded-xl w-full focus:outline-pink-400"
                     />
 
                     <button
                         disabled={!cancreate()}
                         onClick={createtree}
-                        className={`px-4 py-2 rounded-full font-bold text-white mx-auto bg-black ${cancreate() ? "bg-black" : "bg-gray-500"}`}>
+                        className={`px-4 py-2 rounded-full font-bold text-white w-full md:w-fit mx-auto ${cancreate() ? "bg-black" : "bg-gray-500"}`}>
                         Create your Linktree
                     </button>
 
                 </div>
             </div>
 
-            <div className='h-screen overflow-hidden'>
+            <div className="hidden md:block h-screen overflow-hidden">
                 <img
-                    className='w-full h-full object-cover'
+                    className='w-full h-full object-cover '
                     src='https://linktr.ee/universal-login/assets/banner-login-desktop-D8selsDi.webp'
                     alt='banner'
                 />

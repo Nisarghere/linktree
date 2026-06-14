@@ -23,14 +23,14 @@ const Navbar = () => {
         <div className='bg-white absolute flex fixed justify-between w-[80vw] top-10 right-[10vw] rounded-full p-2  '>
             <nav className='flex items-center gap-20'>
 
-                Linktree🌲
+                <img loading="eager" src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="" className='h-10 w-25 ml-3'></img>
 
                 <ul className='flex gap-5 '>
-                    <li>Products</li>
-                    <li>Templates</li>
-                    <li>Marketplace</li>
-                    <li>Learn</li>
-                    <li>Pricing</li>
+                    <li className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer'>Products</li>
+                    <li className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer'>Templates</li>
+                    <li className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer'>Marketplace</li>
+                    <li className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer'>Learn</li>
+                    <li className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer'>Pricing</li>
                 </ul>
             </nav>
             <div className=' flex gap-3'>
