@@ -4,6 +4,7 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+
 export async function createLinktree(handle, pic, links) {
   // pic not stored in DB (since your schema doesn't support it yet)
 
@@ -25,11 +26,19 @@ export async function getLinksByHandle(handle) {
 
   return res.rows;
 }
+console.log(process.env.DATABASE_URL)
 
 
+export async function createUser(name, email, password) {
+  const results = await pool.query(
+    `INSERT INTO users(name,email,password)
+     VALUES($1,$2,$3)
+     RETURNING *`,
+    [name, email, password]
+  )
 
-
-
+  return results.rows[0]
+}
 
 
 

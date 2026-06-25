@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import React from 'react'
 
 
@@ -36,8 +37,8 @@ const Navbar = () => {
             <div className=' flex gap-3'>
                 <button onClick={submitData} className='bg-[#EFF0EC] py-3 cursor-pointer rounded px-4 font-bold'>Log in</button>
                 <button className='bg-[#1E2330] py-3 cursor-pointer text-white rounded-full px-4 font-bold'>sign up free</button>
+        {/* <Link onClick={submitData} className='bg-[#EFF0EC] py-3 cursor-pointer rounded px-4 font-bold' href='/login'></Link> */}
             </div>
-
         </div>
     )
 }
