@@ -1,25 +1,14 @@
 'use client'
 import Link from 'next/link';
+import { Router } from 'next/router';
 import React from 'react'
 
 
 
 const Navbar = () => {
-    async function submitData() {
-  const res = await fetch("/api/generate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      title: "Google",
-      url: "https://google.com",
-    }),
-  });
+    
 
-  const data = await res.json();
-  console.log(data);
-}
+  
     return (
         <div className='bg-white absolute flex fixed justify-between w-[80vw] top-10 right-[10vw] rounded-full p-2  '>
             <nav className='flex items-center gap-20'>
@@ -35,9 +24,8 @@ const Navbar = () => {
                 </ul>
             </nav>
             <div className=' flex gap-3'>
-                <button onClick={submitData} className='bg-[#EFF0EC] py-3 cursor-pointer rounded px-4 font-bold'>Log in</button>
-                <button className='bg-[#1E2330] py-3 cursor-pointer text-white rounded-full px-4 font-bold'>sign up free</button>
-        {/* <Link onClick={submitData} className='bg-[#EFF0EC] py-3 cursor-pointer rounded px-4 font-bold' href='/login'></Link> */}
+        <Link  className='bg-[#EFF0EC] py-3 cursor-pointer rounded px-4 font-bold' href='/login'>Log in</Link>
+                <Link  className='bg-[#1E2330] py-3 cursor-pointer text-white rounded-full px-4 font-bold' href='/signup'>sign up free</Link>
             </div>
         </div>
     )

@@ -1,4 +1,5 @@
 "use client"
+import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
 
@@ -6,12 +7,12 @@ export default function SignupPage() {
   const [name, setname] = useState('')
   const [email, setemail] = useState('')
   const [password, setpassword] = useState('')
-
+  const [success, setsuccess] = useState(false)
+  const router = useRouter()
    const sendData = async(e)=> {
     // signup page
-     e.preventDefault();
-    console.log('button clicked')
-        const response = await fetch('/api/signup', {
+     e.preventDefault()
+       try { const response = await fetch('/api/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -21,12 +22,27 @@ export default function SignupPage() {
             email,
             password
           })
-        })
-          const res = await response.json()
-          console.log(res)
+        })          
+        if (response.ok){
+          setsuccess(true)
+          setTimeout(()=>{
+            router.push('/login')
+
+          }, 3000)
+        }
+        else{
+          console.log('Sign up failed')
+        }} catch(err){
+          console.log('Requet failed', err)
+        }
+
         }
 
   return (
+    <>
+      {
+        success && alert('Redirecting....') 
+      }
     <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-4">
       <div className="w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl">
         <h1 className="text-3xl font-bold text-white text-center">
@@ -88,5 +104,7 @@ export default function SignupPage() {
         </p>
       </div>
     </div>
+        </>
+
   );
 }

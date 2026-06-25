@@ -31,7 +31,7 @@ console.log(process.env.DATABASE_URL)
 
 export async function createUser(name, email, password) {
   const results = await pool.query(
-    `INSERT INTO users(name,email,password)
+    `INSERT INTO userdata(name,email,password)
      VALUES($1,$2,$3)
      RETURNING *`,
     [name, email, password]
@@ -42,17 +42,3 @@ export async function createUser(name, email, password) {
 
 
 
-// import { Pool } from 'pg'
-
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL
-// })
-
-// export async function createLinktree(handle, pic, links) {
-//   for (const link of links) {
-//     await pool.query(
-//       'INSERT INTO links (handle, url, text) VALUES ($1, $2, $3)',
-//       [handle, link.url, link.text]
-//     )
-//   }
-// }
