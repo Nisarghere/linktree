@@ -55,26 +55,37 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className='md:hidden flex flex-col mt-3 gap-1 border-t border-gray-100 pt-3'>
-          {navLinks.map((link) => (
-            <span
-              key={link}
-              className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer text-sm'
-            >
-              {link}
-            </span>
-          ))}
-          <div className='flex gap-3 mt-3'>
-            <Link className='bg-[#EFF0EC] py-2 cursor-pointer rounded px-4 font-bold text-sm w-full text-center' href='/login'>
-              Log in
-            </Link>
-            <Link className='bg-black py-2 hover:bg-black/20  cursor-pointer text-white rounded-full px-4 font-bold text-sm w-full text-center' href='/signup'>
-              sign up free
-            </Link>
-          </div>
-        </div>
-      )}
+    {/* Mobile Menu */}
+{isOpen && (
+  <div className="absolute top-full left-0 mt-2 w-full rounded-2xl bg-white shadow-lg border border-gray-100 p-4 md:hidden">
+    <ul className="flex flex-col gap-2">
+      {navLinks.map((link) => (
+        <li
+          key={link}
+          className="px-3 py-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+        >
+          {link}
+        </li>
+      ))}
+    </ul>
+
+    <div className="flex flex-col gap-2 mt-4">
+      <Link
+        href="/login"
+        className="w-full text-center bg-gray-100 py-2 rounded-lg font-semibold"
+      >
+        Log in
+      </Link>
+
+      <Link
+        href="/signup"
+        className="w-full text-center bg-black text-white py-2 rounded-full font-semibold"
+      >
+        Sign up free
+      </Link>
+    </div>
+  </div>
+)}
     </div>
   )
 }
