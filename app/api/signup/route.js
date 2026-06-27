@@ -13,7 +13,7 @@ export async function POST(request) {
     email,
     hash
   )
-const { password: _, ...safeUser } = user;
+const { password: _ , ...safeUser } = user;
 
   return Response.json({
     message: 'success',
