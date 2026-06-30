@@ -1,6 +1,6 @@
 import { Pool } from "pg";
 
-const pool = new Pool({
+export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
@@ -26,7 +26,6 @@ export async function getLinksByHandle(handle) {
 
   return res.rows;
 }
-console.log(process.env.DATABASE_URL)
 
 
 export async function createUser(name, email, password) {

@@ -1,4 +1,5 @@
 "use client"
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 
@@ -42,71 +43,76 @@ export default function SignupPage() {
 
   return (
     <>
-      {
-        success && alert('Redirecting....')
-      }
-      <div className="min-h-screen bg-[#0f172a] flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl p-8 shadow-xl">
-          <h1 className="text-3xl font-bold text-white text-center">
-            Create Account
-          </h1>
+  {success && alert("Redirecting....")}
 
-          <p className="text-gray-400 text-center mt-2">
-            Join and create your personal link page
-          </p>
+  <div className="min-h-screen bg-gradient-to-r from-pink-300 to-orange-200 flex items-center justify-center px-4">
+    <div className="w-full max-w-md bg-white/70 backdrop-blur-lg border border-orange-200 rounded-2xl p-8 shadow-2xl">
+      <h1 className="text-3xl font-bold text-red-700 text-center">
+        Create Account
+      </h1>
 
-          <form onSubmit={sendData} className="mt-8 space-y-5">
-            <div>
-              <label className="block text-gray-300 mb-2">Name</label>
-              <input
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-                type="text"
-                placeholder="John Doe"
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
+      <p className="text-orange-700 text-center mt-2">
+        Join and create your personal link page
+      </p>
 
-            <div>
-              <label className="block text-gray-300 mb-2">Email</label>
-              <input
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-                type="email"
-                placeholder="john@example.com"
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-gray-300 mb-2">Password</label>
-              <input
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                type="password"
-                placeholder="••••••••"
-                className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-
-            <button
-
-              type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg font-semibold transition"
-            >
-              Sign Up
-            </button>
-          </form>
-
-          <p className="text-center text-gray-400 mt-6">
-            Already have an account?{" "}
-            <span className="text-purple-400 cursor-pointer hover:text-purple-300">
-              Login
-            </span>
-          </p>
+      <form onSubmit={sendData} className="mt-8 space-y-5">
+        <div>
+          <label className="block text-red-700 mb-2 font-medium">
+            Name
+          </label>
+          <input
+            value={name}
+            onChange={(e) => setname(e.target.value)}
+            type="text"
+            placeholder="John Doe"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-orange-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
+          />
         </div>
-      </div>
-    </>
 
+        <div>
+          <label className="block text-red-700 mb-2 font-medium">
+            Email
+          </label>
+          <input
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+            type="email"
+            placeholder="john@example.com"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-orange-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
+          />
+        </div>
+
+        <div>
+          <label className="block text-red-700 mb-2 font-medium">
+            Password
+          </label>
+          <input
+            value={password}
+            onChange={(e) => setpassword(e.target.value)}
+            type="password"
+            placeholder="••••••••"
+            className="w-full px-4 py-3 rounded-lg bg-white border border-orange-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg"
+        >
+          Sign Up
+        </button>
+      </form>
+
+      <p className="text-center text-orange-700 mt-6">
+        Already have an account?{" "}
+        
+
+        <Link href='/login' className="text-red-600 cursor-pointer hover:text-red-700 font-semibold">
+              Login
+            </Link>
+      </p>
+    </div>
+  </div>
+</>
   );
 }
