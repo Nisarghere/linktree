@@ -14,6 +14,7 @@ const page = () => {
 
             if (response.ok) {
                 const user = await response.json()
+                console.log(user)
                 setuser(user)
                 setloading(false)
             } else {
@@ -53,9 +54,16 @@ const page = () => {
                 <div className='absolute -inset-x-10 -top-10 h-40 bg-emerald-500/20 blur-3xl rounded-full pointer-events-none' />
 
                 <div className='relative bg-[#161922] border border-white/10 rounded-2xl px-8 py-10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)]'>
+                    <div className='flex justify-between'>
+
                     <span className='text-xs uppercase tracking-[0.2em] text-emerald-400/80'>
                         Account
                     </span>
+
+                    <button className='text-xs uppercase tracking-[0.2em] cursor-pointer text-emerald-400/80'>
+                        Handles
+                    </button>
+                    </div>
 
                     <div className='mt-6 flex flex-col items-center text-center'>
                         <div className='h-20 w-20 rounded-full bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center'>

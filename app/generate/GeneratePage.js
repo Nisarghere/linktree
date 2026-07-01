@@ -22,7 +22,7 @@ const Generate = () => {
         text: ""
     }])
 
-    function Addhandle() {
+    function Redirecthandle() {
         console.log(createhandle)
         console.log('clicked')
         router.push(`/${createhandle}`)
@@ -115,7 +115,7 @@ const Generate = () => {
                         {
                             createhandle &&
                             <button
-                                onClick={Addhandle} className={`px-3 py-2 font-semibold underline rounded-full text-white w-fit bg-black textwhite font-semibold'}`}>
+                                onClick={Redirecthandle} className={`px-3 py-2 font-semibold underline rounded-full text-white w-fit bg-black textwhite font-semibold'}`}>
                                 @{createhandle}
                             </button>}
                     </div>

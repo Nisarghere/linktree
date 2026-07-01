@@ -16,20 +16,20 @@ import jwt from 'jsonwebtoken';
         )
     }
 
+    
     const user = results.rows[0]
     const isMatch = await bcrypt.compare( req.password, user.password)
     console.log(isMatch)
     if (!isMatch){
          return Response.json(
             {message:'Invalid credentials'},
-            {status:401}
-        )
+            {status:401}    )
     }
     
     
     
     const token = jwt.sign(
-        {userId:user.id, email: user.email},
+        {userId:user.id},
         process.env.JWT_SECRET,
         {expiresIn:'7d'}
     )
