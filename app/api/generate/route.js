@@ -1,4 +1,7 @@
 import { createLinktree } from "@/app/lib/db";
+import { cookies } from "next/headers";
+import jwt from 'jsonwebtoken'
+
 
 export async function POST(req) {
   try {
@@ -27,7 +30,14 @@ export async function POST(req) {
       );
     }
 
-    await createLinktree(handle, pic, safeLinks);
+    const cookieStore = await cookies()
+    const token = cookieStore.get("session")?.value
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+
+    const userid = decoded.userId 
+    
+    await createLinktree(userid, handle, pic, safeLinks);
 
     return Response.json({ success: true });
   } catch (err) {

@@ -8,13 +8,19 @@ const page = () => {
 
     const [user, setuser] = useState(null)
     const [loading, setloading] = useState(true)
+
+    
+    
+    
+
+
     useEffect(() => {
         async function getData() {
             const response = await fetch('/api/profile')
 
             if (response.ok) {
                 const user = await response.json()
-                console.log(user)
+                // console.log(user)
                 setuser(user)
                 setloading(false)
             } else {
@@ -60,7 +66,7 @@ const page = () => {
                         Account
                     </span>
 
-                    <button className='text-xs uppercase tracking-[0.2em] cursor-pointer text-emerald-400/80'>
+                    <button  className='text-xs uppercase tracking-[0.2em] cursor-pointer text-emerald-400/80'>
                         Handles
                     </button>
                     </div>

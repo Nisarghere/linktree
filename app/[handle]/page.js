@@ -1,13 +1,21 @@
 
-import { getLinksByHandle } from "@/app/lib/db";
+import { cookies } from "next/headers";
 import Link from "next/link";
+import jwt from 'jsonwebtoken'
+import { getLinksByUserId } from "../lib/db";
 
 
 
 export default async function Page({ params }) {
   const { handle } = await params;
 
-  const links = await getLinksByHandle(handle);
+  const cookieStore = await cookies()
+  const token = cookieStore.get("session")?.value
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    const userid =decoded.userId
+
+  const links = await getLinksByUserId(userid);
 
   if (!links || links.length === 0) {
     return (

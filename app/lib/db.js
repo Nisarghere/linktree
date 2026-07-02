@@ -2,26 +2,28 @@ import { Pool } from "pg";
 
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 
-export async function createLinktree(handle, pic, links) {
-  // pic not stored in DB (since your schema doesn't support it yet)
+export async function createLinktree(user_id, handle, pic, links) {
 
   for (const link of links) {
     if (!link?.url || !link?.text) continue;
 
     await pool.query(
-      "INSERT INTO links (handle, url, text, pic) VALUES ($1, $2, $3, $4)",
-      [handle, link.url.trim(), link.text.trim(), pic]
+      "INSERT INTO links (user_id, handle, url, text, pic) VALUES ($1, $2, $3, $4, $5)",
+      [user_id, handle, link.url.trim(), link.text.trim(), pic]
     );
   }
 }
 
-export async function getLinksByHandle(handle) {
+export async function getLinksByUserId(userId) {
   const res = await pool.query(
-    "SELECT * FROM links WHERE handle = $1",
-    [handle]
+    "SELECT * FROM links WHERE user_id = $1",
+    [userId]
   );
 
   return res.rows;

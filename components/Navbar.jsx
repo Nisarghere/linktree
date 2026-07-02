@@ -1,10 +1,43 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-
+import { useRouter } from 'next/navigation'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  2
+  const [user, setuser] = useState(null)
+
+  const router =  useRouter()
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch('/api/profile')
+      const resp = await result.json()
+      if (result.ok) {
+        setuser(resp)
+      } else {
+        setuser(null)
+      }
+
+    }
+    fetchData()
+
+
+  }
+    , [])
+
+
+    async function handleLogout(){
+      const result = await fetch('/api/logout',({
+        method:'POST'
+      }))
+      const resp = await result.json()
+      router.push('/login')
+      setuser(null)
+      console.log(resp)
+    }
+
+
 
   const navLinks = ['Products', 'Templates', 'Marketplace', 'Learn', 'Pricing']
 
@@ -35,23 +68,60 @@ const Navbar = () => {
         </ul>
 
         {/* Desktop Buttons */}
-        <div className='hidden md:flex gap-3'>
-          <Link className='bg-[#EFF0EC] py-2 cursor-pointer rounded px-4 font-bold text-sm' href='/login'>
-            Log in
-          </Link>
 
-          <Link className='bg-[#1E2330] py-2 cursor-pointer text-white rounded-full px-4 font-bold text-sm' href='/signup'>
-            sign up free
-          </Link>
-          <div className='h-10 w-10 rounded-full bg-yellow-500/15 border border-emerald-400/30 flex items-center justify-center'>
-            <Link href='/profile'>
-              <svg className='h-6 w-10 text-emerald-300' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={1.5}
-                  d='M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z' />
-              </svg>
-            </Link>
-          </div>
+        <div className="hidden md:flex items-center gap-3">
+          {
+            !user ? (
+              <>
+
+                <Link
+                  href="/login"
+                  className="rounded-full border border-zinc-200 bg-white px-5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-md"
+                >
+                  Log in
+                </Link>
+
+                <Link
+                  href="/signup"
+                  className="rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-xl hover:shadow-zinc-900/30"
+                >
+                  Sign up free
+                </Link>
+              </>
+            ) : (
+
+              <>
+                <button
+                  onClick={handleLogout}
+                  className=" font-semibold cursor-pointer rounded-full border border-zinc-200 bg-red-400 px-5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-md"
+                >
+                  Log out
+                </button>
+
+                <Link
+                  href="/profile"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md"
+                >
+                  <svg
+                    className="h-5 w-5 text-zinc-700 transition-colors duration-200 hover:text-emerald-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.7}
+                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                    />
+                  </svg>
+                </Link>
+              </>
+            )
+          }
         </div>
+
+
 
         {/* Hamburger Button (mobile only) */}
         <button

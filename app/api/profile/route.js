@@ -28,6 +28,7 @@ export async function GET() {
         const body = await pool.query('select id,name,email from userdata where id=$1', [decoded.userId])
     
         return Response.json(body.rows[0])
+        
     } catch(err){
         return Response.json(
             {message:'invalid token'},
