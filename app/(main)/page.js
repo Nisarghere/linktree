@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import Lottie from 'lottie-react'
-import animationData from './8e8d0f50-1179-11ee-885f-eb04f2187e0a.json'
+import animationData from '../8e8d0f50-1179-11ee-885f-eb04f2187e0a.json'
 
 const page = () => {
   const [text, settext] = useState('')
@@ -15,7 +15,7 @@ const page = () => {
 
   return (
     <div>
-      <Navbar />
+     
 
       <main>
         {/* Section 1 */}

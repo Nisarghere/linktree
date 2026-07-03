@@ -5,16 +5,19 @@ import { useRouter } from 'next/navigation'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [user, setuser] = useState(null)
-
-  const router =  useRouter()
+  const [name, setname] = useState('')
+  console.log(name)
+  const router = useRouter()
 
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await fetch('/api/profile')
       const resp = await result.json()
+
       if (result.ok) {
         setuser(resp)
+        setname(resp.name)
       } else {
         setuser(null)
       }
@@ -27,42 +30,51 @@ const Navbar = () => {
     , [])
 
 
-    async function handleLogout(){
-      const result = await fetch('/api/logout',({
-        method:'POST'
-      }))
-      const resp = await result.json()
-      router.push('/login')
-      setuser(null)
-      console.log(resp)
-    }
+  async function handleLogout() {
+    const result = await fetch('/api/logout', ({
+      method: 'POST'
+    }))
+    const resp = await result.json()
+    router.push('/login')
+    setuser(null)
+    console.log(resp)
+  }
 
 
 
-  const navLinks = ['Products', 'Templates', 'Marketplace', 'Learn', 'Pricing']
+  const navLinks = [
+    { name: 'Home', href: '/' },
+    { name: 'Features', href: '/features' },
+    { name: 'Dashboard', href: '#' },
+  ]
 
   return (
-    <div className='bg-white flex flex-col fixed w-[90vw] top-5 left-1/2 -translate-x-1/2 rounded-full p-3 z-50 shadow-sm'>
+    <div className='bg-white flex flex-col fixed w-[90vw] top-5 left-1/2 -translate-x-1/2  rounded-full p-3 z-50 shadow-sm'>
 
       {/* Top Row */}
       <div className='flex justify-between items-center'>
 
         {/* Logo */}
-        <img
-          loading='eager'
-          src='https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg'
-          alt='logo'
-          className='h-6 w-auto ml-1'
-        />
+        <Link href='/'>
+
+          <img
+            loading='eager'
+            src='https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg'
+            alt='logo'
+            className='h-6 w-auto ml-1'
+          />
+        </Link>
 
         {/* Desktop Links */}
         <ul className='hidden md:flex gap-2'>
           {navLinks.map((link) => (
-            <li
-              key={link}
-              className='font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer text-sm'
-            >
-              {link}
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className="font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer text-sm"
+              >
+                {link.name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -91,6 +103,10 @@ const Navbar = () => {
             ) : (
 
               <>
+
+                 <Link      className="rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-xl hover:shadow-zinc-900/30"
+
+                  href='/profile'>{name}</Link>
                 <button
                   onClick={handleLogout}
                   className=" font-semibold cursor-pointer rounded-full border border-zinc-200 bg-red-400 px-5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-md"
@@ -98,7 +114,7 @@ const Navbar = () => {
                   Log out
                 </button>
 
-                <Link
+                {/* <Link
                   href="/profile"
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-zinc-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:bg-emerald-50 hover:shadow-md"
                 >
@@ -115,7 +131,7 @@ const Navbar = () => {
                       d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                     />
                   </svg>
-                </Link>
+                </Link> */}
               </>
             )
           }

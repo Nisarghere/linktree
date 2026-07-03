@@ -2,7 +2,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import jwt from 'jsonwebtoken'
-import { getLinksByUserId } from "../lib/db";
+import { getLinksByUserId } from "@/app/lib/db";
 
 
 

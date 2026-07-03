@@ -35,7 +35,7 @@ import jwt from 'jsonwebtoken';
     )
     
     const cookieStore = await cookies()
-    cookieStore.set('session', token, {
+    cookieStore.set("session", token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'lax',
