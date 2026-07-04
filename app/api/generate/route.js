@@ -39,7 +39,9 @@ export async function POST(req) {
     
     await createLinktree(userid, handle, pic, safeLinks);
 
-    return Response.json({ success: true });
+    return Response.json({ success: true,
+      handle:handle
+     });
   } catch (err) {
     console.error("API ERROR:", err);
 

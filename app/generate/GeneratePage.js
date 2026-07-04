@@ -17,6 +17,7 @@ const Generate = () => {
     const [createhandle, setcreatehandle] = useState('')
     const [handle, sethandle] = useState(searchParams.get('handle') || '')
     const [pic, setpic] = useState('')
+    const [data, setdata] = useState([])
     const [links, setlinks] = useState([{
         url: "",
         text: ""
@@ -70,7 +71,8 @@ const Generate = () => {
         });
 
         const data = await resp.json()
-        console.log(data)
+        setdata(data)
+        console.log(data.handle)
 
         if (data.success) {
             toast.success('linktree created')
@@ -86,7 +88,7 @@ const Generate = () => {
     return (
         <div className="min-h-screen grid grid-cols-1 md:grid-cols-2">
 
-            <div className="flex flex-col justify-center items-center bg-[#225AC0] p-4 md:p-8">                {/* <div className='flex flex-col justify-center  bg-[#225AC0] items-cent22er min-h-screen min-w-screen md:flex md:flex-col md:items-center '> */}
+            <div className="flex flex-col justify-center items-center bg-[#225AC0] p-4 md:p-8">              
 
                 <div className="bg-pink-400 p-5 rounded-2xl flex flex-col gap-5 w-full max-w-xl">
                     <div className="flex flex-col gap-3 md:flex-row md:justify-between md:items-center">
@@ -119,13 +121,19 @@ const Generate = () => {
                                 @{createhandle}
                             </button>}
                     </div>
+                    {
+                        !data.handle && (
+                            <input
+                            value={handle}
+                            onChange={(e) => sethandle(e.target.value)}
+                            placeholder='Choose a handle'
+                            className='bg-white px-5 py-3 rounded-xl w-full focus:outline-pink-400'
+                        />
+                        )
 
-                    <input
-                        value={handle}
-                        onChange={(e) => sethandle(e.target.value)}
-                        placeholder='Choose a handle'
-                        className='bg-white px-5 py-3 rounded-xl w-full focus:outline-pink-400'
-                    />
+                    }
+
+                    
 
                     <h2 className='font-semibold text-gray-600'>
                         Step 2: Add Links

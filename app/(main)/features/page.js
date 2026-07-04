@@ -42,7 +42,7 @@ export default function Features() {
   ];
 
   return (
-    <main className="min-h-screen bg-gray-50 ">
+    <main className="min-h-screen bg-gray-200 ">
       {/* Hero */}
       <section className="max-w-6xl mx-auto px-6 py-30 text-center ">
         <h1 className="text-5xl font-bold text-gray-900">

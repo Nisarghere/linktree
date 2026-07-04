@@ -45,7 +45,7 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Features', href: '/features' },
-    { name: 'Dashboard', href: '#' },
+    { name: 'Dashboard', href: '/dashboard' },
   ]
 
   return (
@@ -103,10 +103,18 @@ const Navbar = () => {
             ) : (
 
               <>
+                <Link
+            href="/profile"
+            className="group flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-2 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-xs font-bold text-white">
+              {name[0].toUpperCase()}
+            </div>
 
-                 <Link      className="rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-xl hover:shadow-zinc-900/30"
-
-                  href='/profile'>{name}</Link>
+            <span className="text-sm font-medium text-zinc-400 group-hover:text-black">
+              {name}
+            </span>
+          </Link>
                 <button
                   onClick={handleLogout}
                   className=" font-semibold cursor-pointer rounded-full border border-zinc-200 bg-red-400 px-5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-md"

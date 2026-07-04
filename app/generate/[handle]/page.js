@@ -16,6 +16,7 @@ export default async function Page({ params }) {
     const userid =decoded.userId
 
   const links = await getLinksByUserId(userid);
+  console.log()
 
   if (!links || links.length === 0) {
     return (
@@ -45,7 +46,7 @@ export default async function Page({ params }) {
         />
 
         <h1 className="text-white text-3xl font-bold mt-4">
-          @{handle}
+          @{links[0].handle}
         </h1>
 
         <p className="text-white/80 mt-2 mb-8 text-center">
