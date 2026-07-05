@@ -8,18 +8,28 @@ export const pool = new Pool({
 });
 
 
-export async function createLinktree(user_id, handle, pic, links) {
+export async function createLinktree(user_id, pic, links) {
 
   for (const link of links) {
     if (!link?.url || !link?.text) continue;
 
     await pool.query(
-      "INSERT INTO links (user_id, handle, url, text, pic) VALUES ($1, $2, $3, $4, $5)",
-      [user_id, handle, link.url.trim(), link.text.trim(), pic]
+      "INSERT INTO links (user_id, url, text, pic) VALUES ($1, $2, $3, $4)",
+      [user_id, link.url.trim(), link.text.trim(), pic]
     );
   }
 }
 
+export async function createHandle(handle, userId){
+  const result = await pool.query('update userdata set handle=$1 where id=$2',[handle, userId])
+
+}
+
+export async function getHandle(userId) {
+  const result = await pool.query('select handle from userdata where id=$1', [userId])
+
+return result.rows[0].handle
+}
 export async function getLinksByUserId(userId) {
   const res = await pool.query(
     "SELECT * FROM links WHERE user_id = $1",

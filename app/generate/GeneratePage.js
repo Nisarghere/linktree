@@ -72,17 +72,17 @@ const Generate = () => {
 
         const data = await resp.json()
         setdata(data)
-        console.log(data.handle)
+        console.log(data)
 
         if (data.success) {
             toast.success('linktree created')
             sethandle('')
+            setcreatehandle(handle)
             setpic('')
             setlinks([{ url: '', text: '' }])
         } else {
             toast.error('linktree not created')
         }
-        setcreatehandle(handle)
     }
 
     return (

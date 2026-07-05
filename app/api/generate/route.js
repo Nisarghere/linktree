@@ -1,4 +1,4 @@
-import { createLinktree } from "@/app/lib/db";
+import { createHandle, createLinktree } from "@/app/lib/db";
 import { cookies } from "next/headers";
 import jwt from 'jsonwebtoken'
 
@@ -9,7 +9,7 @@ export async function POST(req) {
 
     const { handle, pic, links } = body;
 
-    console.log("RECEIVED:", body);
+    // console.log("RECEIVED:", body);
 
     // validation
     if (!handle || !pic || !Array.isArray(links)) {
@@ -36,11 +36,12 @@ export async function POST(req) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
     const userid = decoded.userId 
+    console.log(userid)
     
-    await createLinktree(userid, handle, pic, safeLinks);
+    await createLinktree(userid, pic, safeLinks);
+    await createHandle(handle, userid)
 
-    return Response.json({ success: true,
-      handle:handle
+    return Response.json({ success: true
      });
   } catch (err) {
     console.error("API ERROR:", err);
@@ -51,23 +52,4 @@ export async function POST(req) {
     );
   }
 }
-
-// import { createLinktree } from "@/app/lib/db"
-
-// export async function POST(request) {
-//   try {
-//     const { handle, pic, links } = await request.json()
-
-//     await createLinktree(handle, pic, links)
-
-//     return Response.json({ success: true })
-
-//   } catch (error) {
-//   console.log("FULL ERROR:", error)
-//   return Response.json({
-//     success: false,
-//     error: error.message,
-//     stack: error.stack
-//   })
-// }
-// }
+ 

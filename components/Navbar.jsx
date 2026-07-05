@@ -49,7 +49,18 @@ const Navbar = () => {
   ]
 
   return (
-    <div className='bg-white flex flex-col fixed w-[90vw] top-5 left-1/2 -translate-x-1/2  rounded-full p-3 z-50 shadow-sm'>
+    <div className="
+    fixed top-5 left-1/2
+    w-[92vw] max-w-7xl
+    -translate-x-1/2
+    rounded-full
+    border border-white/40
+    bg-white/80
+    backdrop-blur-xl
+    shadow-[0_12px_40px_rgba(0,0,0,0.08)]
+    px-5 py-3
+    z-50
+    ">
 
       {/* Top Row */}
       <div className='flex justify-between items-center'>
@@ -61,7 +72,7 @@ const Navbar = () => {
             loading='eager'
             src='https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg'
             alt='logo'
-            className='h-6 w-auto ml-1'
+            className='h-7 transition-transform duration-300 group-hover:scale-105 '
           />
         </Link>
 
@@ -71,7 +82,20 @@ const Navbar = () => {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-sans hover:bg-[#eff0ec] px-3 py-2 rounded cursor-pointer text-sm"
+                className="
+                      relative
+                      rounded-full
+                      px-4
+                      py-2
+                      text-sm
+                      font-medium
+                      text-zinc-600
+                      transition-all
+                      duration-300
+                      hover:bg-zinc-100
+                      hover:text-black
+                      hover:-translate-y-0.5
+                      "
               >
                 {link.name}
               </Link>
@@ -88,38 +112,141 @@ const Navbar = () => {
 
                 <Link
                   href="/login"
-                  className="rounded-full border border-zinc-200 bg-white px-5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-md"
+                  className="group relative overflow-hidden rounded-full border border-zinc-200 bg-white/90 px-5 py-2.5 text-sm font-semibold text-zinc-700 backdrop-blur-md shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:bg-white hover:shadow-xl active:scale-95"
                 >
-                  Log in
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-zinc-100 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
+
+                  <span className="relative flex items-center gap-2">
+                    Log in
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </span>
                 </Link>
 
                 <Link
                   href="/signup"
-                  className="rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-zinc-900/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-black hover:shadow-xl hover:shadow-zinc-900/30"
+                  className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-black px-6 py-2.5 text-sm font-semibold text-white shadow-xl shadow-zinc-900/25 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-2xl hover:shadow-zinc-900/40 active:scale-95"
                 >
-                  Sign up free
+                  {/* Shine */}
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
+
+                  {/* Glow */}
+                  <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
+
+                  <span className="relative z-10 flex items-center gap-2">
+                    Sign up free
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13 5l7 7-7 7M5 12h15"
+                      />
+                    </svg>
+                  </span>
                 </Link>
               </>
             ) : (
 
               <>
                 <Link
-            href="/profile"
-            className="group flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-2 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
-          >
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-black text-xs font-bold text-white">
-              {name[0].toUpperCase()}
-            </div>
+                  href="/profile"
+                  className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-zinc-200/80 bg-white/90 px-3 py-2 backdrop-blur-md shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-2xl hover:shadow-zinc-300/30 active:scale-[0.98]"
+                >
+                  {/* Shine Effect */}
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
 
-            <span className="text-sm font-medium text-zinc-400 group-hover:text-black">
-              {name}
-            </span>
-          </Link>
+                  {/* Avatar */}
+                  <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br  from-sky-500 to-cyan-500 shadow-lg shadow-emerald-500/30 transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
+                    <svg
+                      className="h-5 w-5 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                      />
+                    </svg>
+                  </div>
+
+                  {/* Name */}
+                  <div className="relative flex flex-col">
+                    <span className="text-sm font-semibold text-zinc-800 transition-colors duration-300 group-hover:text-black">
+                      {name}
+                    </span>
+                    <span className="text-xs text-zinc-500 transition-colors duration-300 group-hover:text-zinc-700">
+                      View Profile
+                    </span>
+                  </div>
+
+                  {/* Arrow */}
+                  <svg
+                    className="ml-auto h-4 w-4 text-zinc-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-zinc-700"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </Link>
                 <button
                   onClick={handleLogout}
-                  className=" font-semibold cursor-pointer rounded-full border border-zinc-200 bg-red-400 px-5 py-2.5 text-sm font-medium text-zinc-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-md"
+                  className="group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-red-500 via-rose-500 to-red-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:shadow-2xl hover:shadow-red-500/40 active:translate-y-0 active:scale-95"
                 >
-                  Log out
+                  {/* Shine Effect */}
+                  <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
+
+                  {/* Glow */}
+                  <span className="absolute inset-0 rounded-full opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100 bg-red-400/40" />
+
+                  {/* Content */}
+                  <span className="relative z-10 flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M17 16l4-4m0 0l-4-4m4 4H9m4 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1"
+                      />
+                    </svg>
+
+                    Log out
+                  </span>
                 </button>
 
                 {/* <Link

@@ -38,7 +38,7 @@ const page = () => {
               />
               <button
                 onClick={() => createtree()}
-                className='px-6 py-4 bg-[#254F1A] rounded-full font-semibold text-white w-full sm:w-auto'
+                className='px-6 py-4 bg-[#254F1A] hover:bg-red-900 cursor-pointer rounded-full font-semibold text-white w-full sm:w-auto'
               >
                 Claim your tree
               </button>
@@ -76,7 +76,7 @@ const page = () => {
             <div className='flex gap-2'>
               <button
                 onClick={() => createtree()}
-                className='px-8 py-4 bg-[#e9c0e9] rounded-full font-bold text-black w-full sm:w-auto'
+                className='px-8 py-4 bg-[#e9c0e9] hover:bg-[#e6cde6] cursor-pointer rounded-full font-bold text-black w-full sm:w-auto'
               >
                 Get started for free
               </button>

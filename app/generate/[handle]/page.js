@@ -2,21 +2,39 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import jwt from 'jsonwebtoken'
-import { getLinksByUserId } from "@/app/lib/db";
+import { getHandle, getLinksByUserId } from "@/app/lib/db";
 
 
 
 export default async function Page({ params }) {
   const { handle } = await params;
 
+
+  
   const cookieStore = await cookies()
   const token = cookieStore.get("session")?.value
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET)
-    const userid =decoded.userId
-
+  
+  const decoded = jwt.verify(token, process.env.JWT_SECRET)
+  const userid =decoded.userId
+  
   const links = await getLinksByUserId(userid);
-  console.log()
+  
+
+  const gethandle = await getHandle(userid)
+
+  console.log(gethandle)
+
+
+  if (handle !== gethandle){
+
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
+        No profile exist such as @{handle}
+      </div>
+    )
+  }
+
+
 
   if (!links || links.length === 0) {
     return (
@@ -46,7 +64,7 @@ export default async function Page({ params }) {
         />
 
         <h1 className="text-white text-3xl font-bold mt-4">
-          @{links[0].handle}
+          @{gethandle}
         </h1>
 
         <p className="text-white/80 mt-2 mb-8 text-center">
