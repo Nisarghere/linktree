@@ -25,7 +25,7 @@ export async function GET() {
 
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
     
-        const body = await pool.query('select id,name,email from userdata where id=$1', [decoded.userId])
+        const body = await pool.query('select id,name,email,handle from userdata where id=$1', [decoded.userId])
     
         return Response.json(body.rows[0])
         

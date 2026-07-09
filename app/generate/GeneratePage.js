@@ -26,7 +26,7 @@ const Generate = () => {
     function Redirecthandle() {
         console.log(createhandle)
         console.log('clicked')
-        router.push(`/generate/${createhandle}`)
+        router.push(`/generate/${createhandle.toLowerCase()}`)
     }
     function updatelink(index, field, value) {
         const updatedlink = [...links]

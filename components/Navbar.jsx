@@ -63,7 +63,7 @@ const Navbar = () => {
     ">
 
       {/* Top Row */}
-      <div className='flex justify-between items-center'>
+      <div className='flex justify-between items-center h-15'>
 
         {/* Logo */}
         <Link href='/'>

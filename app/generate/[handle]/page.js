@@ -1,8 +1,12 @@
-
-import { cookies } from "next/headers";
+ import { cookies } from "next/headers";
 import Link from "next/link";
 import jwt from 'jsonwebtoken'
 import { getHandle, getLinksByUserId } from "@/app/lib/db";
+import { ArrowLeft, ChevronLeft, ExternalLink, Link2, Sparkles } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+ import Handle from "./Handle";
+
+
 
 
 
@@ -48,44 +52,124 @@ export default async function Page({ params }) {
 
  
 
+
+
+
+
   return (
 
 
-    <div className="min-h-screen bg-linear-to-b from-blue-600 to-blue-800 flex items-center justify-center px-4">
-        <Link href="/generate" className=" absolute  top-5 left-5 text-2xl text-black bg-white px-4 py-2 rounded-full hover:scale-105 duration-300 transition">↩</Link>
-       
-      <div className="w-full max-w-md flex flex-col items-center">
+   <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#00C16A] via-[#21D07A] to-[#B7F5C6]">
+
+  {/* Decorative Blobs */}
+  <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-white/20 blur-3xl" />
+  <div className="absolute bottom-0 -right-32 h-[420px] w-[420px] rounded-full bg-emerald-900/10 blur-3xl" />
+
+  {/* Back Button */}
+<Link
+  href="/generate"
+  className="group absolute left-8 top-8 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 backdrop-blur-md shadow-md border border-white/50 transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:shadow-xl"
+>
+  <ArrowLeft
+    size={20}
+    className="text-zinc-700 transition-all duration-300 group-hover:-translate-x-1 group-hover:text-white"
+  />
+</Link>
+  <div className="relative z-10 flex min-h-screen items-center justify-center px-5">
+
+    <div className="w-full max-w-md">
+
+      {/* Card */}
+      <div className="rounded-[32px] bg-white/75 backdrop-blur-2xl border border-white/60 shadow-[0_25px_80px_rgba(0,0,0,.18)] px-8 py-10">
 
         {/* Profile */}
-        <img
-          src={profilePic}
-          alt="Profile"
-          className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-lg"
-        />
+        <div className="flex flex-col items-center">
 
-        <h1 className="text-white text-3xl font-bold mt-4">
-          @{gethandle}
-        </h1>
+          <div className="relative">
 
-        <p className="text-white/80 mt-2 mb-8 text-center">
-          Welcome to my Linktree
-        </p>
+            <Handle />
+
+
+          </div>
+
+          <h1 className="mt-6 text-3xl font-bold text-zinc-900">
+            @{gethandle}
+          </h1>
+
+          <p className="mt-2 text-center text-zinc-500">
+            Welcome to my little corner of the internet 🌿
+          </p>
+
+        </div>
+
+        {/* Divider */}
+        <div className="my-8 h-px bg-zinc-200" />
 
         {/* Links */}
-        <div className="w-full flex flex-col gap-4">
+        <div className="space-y-4">
+
           {links.map((link) => (
+
             <a
               key={link.id}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-gray-800 font-semibold text-center py-4 px-6 rounded-2xl shadow-md hover:scale-105 hover:shadow-xl transition duration-300"
+              className="
+                group
+                flex
+                items-center
+                justify-between
+                rounded-2xl
+                bg-white
+                px-6
+                py-4
+                shadow-md
+                border
+                border-zinc-100
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:border-emerald-400
+                hover:shadow-xl
+              "
             >
-              {link.text}
+
+              <span className="font-semibold text-zinc-800 group-hover:text-emerald-600">
+                {link.text}
+              </span>
+
+              <ExternalLink
+                size={18}
+                className="text-zinc-400 transition group-hover:text-emerald-600 group-hover:rotate-12"
+              />
+          
+                
+ 
             </a>
+
           ))}
+
         </div>
+
+        {/* Footer */}
+        <div className="mt-10 text-center">
+
+          <p className="text-xs tracking-wide text-zinc-400">
+            Powered by
+          </p>
+
+          <h2 className="mt-1 text-lg font-bold text-zinc-800">
+            LinkTree Doppelganger
+          </h2>
+
+        </div>
+
       </div>
+
     </div>
-  );
+
+  </div>
+
+</div> );
 }
