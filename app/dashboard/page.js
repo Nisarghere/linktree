@@ -1,110 +1,140 @@
+import { Link } from 'lucide-react'
 import React from 'react'
 
 const page = () => {
   
   return (
     <>
-  <div className="min-h-screen bg-zinc-100">
-  <div className="mx-auto max-w-7xl px-6 py-10">
+ <div className="min-h-screen bg-zinc-100">
+  <div className="mx-auto max-w-6xl px-6 py-10">
 
-    <h1 className="text-3xl font-bold mb-8">
-      Dashboard
-    </h1>
+    {/* Header */}
+    <div className="mb-8 flex items-center justify-between">
+      <div className='flex items-center'>
 
-    <div className="grid gap-8 lg:grid-cols-3">
+    <Link href='/'>
 
-      {/* Profile */}
-<section className="rounded-3xl bg-white p-8 shadow">
-      
-    <div className="flex justify-center">
-          <img
-            src="https://i.pravatar.cc/200"
-            alt="Profile"
-            className="h-28 w-28 rounded-full object-cover shadow-md"
-          />
-        </div>
-          <div className="mt-6 text-center">
-          <h1 className="text-2xl font-bold text-zinc-900">
-            Alex Carter
-          </h1>
-          <p className="mt-1 text-sm text-zinc-500">
-            @alexcarter
-          </p>
-        </div>
-        <button className='bg-black transition hover:bg-zinc-800 px-5 py-3 mt-5   w-full rounded-lg text-sm text-white font-bold '>Edit Profile</button>
+          <img src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="logo" />
+        </Link>
+      </div>
+     <div>
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <p className="text-zinc-500 mt-1">
+          Manage all your links from one place.
+        </p>
+      </div>
+    </div>
 
-        
-        
-</section>
+    <div className="grid gap-8 lg:grid-cols-[380px_1fr]">
 
       {/* Add Link */}
-      <section className="lg:col-span-2 rounded-3xl bg-white p-8 shadow">
+      <section className="rounded-3xl bg-white p-8 shadow-sm h-fit">
 
-          <h1 className='text-xl bg-black w-fit px-4 py-2 rounded-full text-white  '>
-            + Add Links
-          </h1>
-        <div className='flex mt-4 gap-3 '>
+        <h2 className="text-xl font-semibold mb-6">
+          Add New Link
+        </h2>
 
-<input
-  type="text"
-  placeholder="Enter URL"
-  className="
-    w-full
-    rounded-2xl
-    border border-zinc-100
-    bg-zinc-50
-    px-4 py-3
-    text-sm
-    placeholder:text-zinc-400
-    transition
-    focus:bg-white
-    focus:border-zinc-300
-    focus:ring-2
-    focus:ring-zinc-200
-    focus:outline-none
-  "
-/>         
-<input
-  type="text"
-  placeholder="Enter Text"
-  className="
-    w-full
-    rounded-2xl
-    border border-zinc-100
-    bg-zinc-50
-    px-4 py-3
-    text-sm
-    placeholder:text-zinc-400
-    transition
-    focus:bg-white
-    focus:border-zinc-300
-    focus:ring-2
-    focus:ring-zinc-200
-    focus:outline-none
-  "
-/>         
- 
+        <div className="space-y-4">
+
+          <input
+            type="text"
+            placeholder="https://example.com"
+            className="
+              w-full
+              rounded-2xl
+              border
+              border-zinc-200
+              bg-zinc-50
+              px-4
+              py-3
+              text-sm
+              focus:border-black
+              focus:ring-2
+              focus:ring-zinc-200
+              focus:outline-none
+            "
+          />
+
+          <input
+            type="text"
+            placeholder="Button text"
+            className="
+              w-full
+              rounded-2xl
+              border
+              border-zinc-200
+              bg-zinc-50
+              px-4
+              py-3
+              text-sm
+              focus:border-black
+              focus:ring-2
+              focus:ring-zinc-200
+              focus:outline-none
+            "
+          />
+
+          <button
+            className="
+              w-full
+              rounded-2xl
+              bg-black
+              py-3
+              font-medium
+              text-white
+              transition
+              hover:bg-zinc-800
+            "
+          >
+            + Add Link
+          </button>
+
         </div>
-        <div className='flex justify-center'>
-          <button className=' mt-6 bg-black text-white cursor-pointer hover:bg-black/80 text-xl font-bold  rounded-full h-10 w-10 '> + </button>
+
+      </section>
+
+      {/* Links */}
+      <section className="rounded-3xl bg-white p-8 shadow-sm">
+
+        <div className="mb-6 flex items-center justify-between">
+          <h2 className="text-xl font-semibold">
+            Your Links
+          </h2>
+
+          <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-600">
+            1 Link
+          </span>
         </div>
 
-        <div className='bg-zinc-100 rounded-lg w-full h-40 mt-6'>
-          <h2 className='text-center'>Your LinkTree </h2>
-           <div className="bg-zinc-400 m-5 rounded-full">
-              <div className="mx-auto w-full px-6 py-4 flex justify-between items-center">
-                <p className='bg-yellow-400 px-10 py-2 rounded-full'> Linkdin </p>
-                <p>https://www.linkedin.com/company/sarkilar</p>
-                <div className='flex gap-4'>
+        <div className="space-y-4">
 
-                <button className='bg-red-400 text-white rounded-lg p-2'>Edit Link</button>
-                <button className='bg-black text-white rounded-lg p-3'>Delete link</button>
-                </div>
+          <div className="rounded-2xl border border-zinc-200 p-5">
+
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+              <div>
+                <h3 className="font-semibold">LinkedIn</h3>
+
+                <p className="mt-1 text-sm text-zinc-500 break-all">
+                  https://www.linkedin.com/company/sarkilar
+                </p>
+              </div>
+
+              <div className="flex gap-3">
+
+                <button className="rounded-xl border px-4 py-2 hover:bg-zinc-100">
+                  Edit
+                </button>
+
+                <button className="rounded-xl bg-black px-4 py-2 text-white hover:bg-zinc-800">
+                  Delete
+                </button>
+
+              </div>
 
             </div>
 
           </div>
-           
 
         </div>
 
