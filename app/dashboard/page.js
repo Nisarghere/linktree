@@ -1,7 +1,24 @@
-import { Link } from 'lucide-react'
-import React from 'react'
+ 
+import { cookies } from 'next/headers'
+import Link from 'next/link'
+ import jwt from 'jsonwebtoken'
+import { getLinksByUserId } from '../lib/db'
 
-const page = () => {
+const page = async() => {
+  
+
+    const cookieStore = await cookies()
+
+   const token = cookieStore.get("session")?.value
+
+   const decoded = jwt.verify(token,process.env.JWT_SECRET)
+   const userid = decoded.userId
+
+    const links = await getLinksByUserId(userid)
+    console.log(links)
+    
+
+  
   
   return (
     <>
@@ -12,10 +29,7 @@ const page = () => {
     <div className="mb-8 flex items-center justify-between">
       <div className='flex items-center'>
 
-    <Link href='/'>
-
-          <img src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg" alt="logo" />
-        </Link>
+    <Link href='/'> <img loading='eager' src='https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg' alt='logo' className='h-7 transition-transform duration-300 group-hover:scale-105 ' /> </Link>
       </div>
      <div>
         <h1 className="text-3xl font-bold">Dashboard</h1>
@@ -108,15 +122,20 @@ const page = () => {
 
         <div className="space-y-4">
 
-          <div className="rounded-2xl border border-zinc-200 p-5">
 
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
 
-              <div>
-                <h3 className="font-semibold">LinkedIn</h3>
+               {
+                 links.map((link)=>(
+                   <div className="rounded-2xl border border-zinc-200 p-5" key={link.id}>
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between" >
+
+                  
+                   
+              <div >
+                <h3 className="font-semibold">{link.text}</h3>
 
                 <p className="mt-1 text-sm text-zinc-500 break-all">
-                  https://www.linkedin.com/company/sarkilar
+                  {link.url}
                 </p>
               </div>
 
@@ -131,10 +150,14 @@ const page = () => {
                 </button>
 
               </div>
-
             </div>
+                 </div>
+                 ))
 
-          </div>
+              }
+
+
+
 
         </div>
 
