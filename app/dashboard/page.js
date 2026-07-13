@@ -116,7 +116,21 @@ const page = async() => {
           </h2>
 
           <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-600">
-            1 Link
+            {
+              links.length === 1 ? (
+                <div>
+
+                  1 Link
+                </div>
+
+              ):(
+                <div>
+
+                  {links.length} Links
+                  
+                </div>
+                  )
+            }
           </span>
         </div>
 
