@@ -1,8 +1,10 @@
+
  
 import { cookies } from 'next/headers'
 import Link from 'next/link'
  import jwt from 'jsonwebtoken'
 import { getLinksByUserId } from '../lib/db'
+import EditLink from './EditLink'
 
 const page = async() => {
   
@@ -51,55 +53,20 @@ const page = async() => {
         <div className="space-y-4">
 
           <input
-            type="text"
-            placeholder="https://example.com"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-zinc-200
-              bg-zinc-50
-              px-4
-              py-3
-              text-sm
-              focus:border-black
-              focus:ring-2
-              focus:ring-zinc-200
-              focus:outline-none
-            "
-          />
+  type="text"
+  placeholder="https://example.com"
+  className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-zinc-200 focus:outline-none"
+/>
 
-          <input
-            type="text"
-            placeholder="Button text"
-            className="
-              w-full
-              rounded-2xl
-              border
-              border-zinc-200
-              bg-zinc-50
-              px-4
-              py-3
-              text-sm
-              focus:border-black
-              focus:ring-2
-              focus:ring-zinc-200
-              focus:outline-none
-            "
-          />
+<input
+  type="text"
+  placeholder="Button text"
+  className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-zinc-200 focus:outline-none"
+/>
 
-          <button
-            className="
-              w-full
-              rounded-2xl
-              bg-black
-              py-3
-              font-medium
-              text-white
-              transition
-              hover:bg-zinc-800
-            "
-          >
+<button
+  className="w-full rounded-2xl bg-black py-3 font-medium text-white transition hover:bg-zinc-800"
+>
             + Add Link
           </button>
 
@@ -138,37 +105,7 @@ const page = async() => {
 
 
 
-               {
-                 links.map((link)=>(
-                   <div className="rounded-2xl border border-zinc-200 p-5" key={link.id}>
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between" >
-
-                  
-                   
-              <div >
-                <h3 className="font-semibold">{link.text}</h3>
-
-                <p className="mt-1 text-sm text-zinc-500 break-all">
-                  {link.url}
-                </p>
-              </div>
-
-              <div className="flex gap-3">
-
-                <button className="rounded-xl border px-4 py-2 hover:bg-zinc-100">
-                  Edit
-                </button>
-
-                <button className="rounded-xl bg-black px-4 py-2 text-white hover:bg-zinc-800">
-                  Delete
-                </button>
-
-              </div>
-            </div>
-                 </div>
-                 ))
-
-              }
+               <EditLink links={links} />
 
 
 

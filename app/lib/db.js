@@ -54,7 +54,12 @@ export async function createUser(name, email, password) {
 
 
 
-export default async function findUser(email, password){
+export  async function findUser(email, password){
   const results = await pool.query('select * from userdata where email=$1 and password=$2', [email,password])
   
+}
+
+
+export  async function editLinks(text, url, userid){
+  const results = await pool.query('update links set text=$1, url=$2 where user_id=$3', [text, url, userid])
 }
