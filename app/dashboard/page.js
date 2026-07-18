@@ -5,6 +5,7 @@ import Link from 'next/link'
  import jwt from 'jsonwebtoken'
 import { getLinksByUserId } from '../lib/db'
 import EditLink from './EditLink'
+import AddLink from './AddLink'
 
 const page = async() => {
   
@@ -45,32 +46,7 @@ const page = async() => {
 
       {/* Add Link */}
       <section className="rounded-3xl bg-white p-8 shadow-sm h-fit">
-
-        <h2 className="text-xl font-semibold mb-6">
-          Add New Link
-        </h2>
-
-        <div className="space-y-4">
-
-          <input
-  type="text"
-  placeholder="https://example.com"
-  className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-zinc-200 focus:outline-none"
-/>
-
-<input
-  type="text"
-  placeholder="Button text"
-  className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-zinc-200 focus:outline-none"
-/>
-
-<button
-  className="w-full rounded-2xl bg-black py-3 font-medium text-white transition hover:bg-zinc-800"
->
-            + Add Link
-          </button>
-
-        </div>
+        <AddLink />
 
       </section>
 
