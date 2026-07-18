@@ -60,6 +60,8 @@ export  async function findUser(email, password){
 }
 
 
-export  async function editLinks(text, url, userid){
+export  async function updateLink(text, url, userid){
   const results = await pool.query('update links set text=$1, url=$2 where user_id=$3', [text, url, userid])
 }
+
+ 

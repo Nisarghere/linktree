@@ -105,7 +105,7 @@ const page = async() => {
 
 
 
-               <EditLink links={links} />
+               <EditLink links={links} userid={userid}/>
 
 
 

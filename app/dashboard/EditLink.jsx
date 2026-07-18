@@ -1,8 +1,14 @@
 "use client"
 import React, { useState } from 'react'
+import { updateLink } from '../lib/db'
 
-const EditLink = ({links}) => {
+
+
+
+const EditLink = ({links, userid}) => {
   const [editlink, seteditlink] = useState(null)
+   const [text, settext] = useState("")
+  const [url, seturl] = useState("")
 
   function editHandle(linkId){
   seteditlink(linkId)
@@ -13,102 +19,105 @@ const EditLink = ({links}) => {
     seteditlink(null)
   }
 
+  function saveChanges(){
+    const updatedLink = updateLink(text, url, userid)
+    console.log(updateLink)
+  }
+
+
   return (
     <>
-    {
-      links.map((link)=>
-       <div className="rounded-2xl border border-zinc-200 p-5 overflow-hidden" key={link.id}>
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between" >
+  {links.map((link) => (
+    <div
+      key={link.id}
+      className={`group rounded-3xl border bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl
+      ${
+        editlink === link.id
+          ? "border-blue-400 ring-4 ring-blue-100"
+          : "border-zinc-200"
+      }`}
+    >
+      {editlink === link.id ? (
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          {/* Current Link */}
+          <div className="lg:w-1/3">
+            <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
+              Current Link
+            </p>
 
-                  {editlink === link.id ?( 
-<>
+            <h3 className="mt-3 text-xl font-bold text-zinc-900">
+              {link.text}
+            </h3>
 
-            <div className='flex flex-col justify-end' >
-              <div>
-                     <h3 className="font-semibold">{link.text}</h3>
+            <p className="mt-2 break-all text-sm text-zinc-500">
+              {link.url}
+            </p>
+          </div>
 
-                <p className="mt-1 text-sm text-zinc-500 break-all">
-                  {link.url}
-                </p>
-              </div>
+          {/* Edit Form */}
+          <div className="flex-1 rounded-2xl bg-zinc-50 p-5">
+            <div className="space-y-4">
+              <input
+                value={text}
+                onChange={(e) => settext(e.target.value)}
+                placeholder="Link Title"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 transition focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100"
+              />
 
+              <input
+                value={url}
+                onChange={(e) => seturl(e.target.value)}
+                placeholder="https://example.com"
+                className="w-full rounded-xl border border-zinc-300 bg-white px-4 py-3 transition focus:border-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-100"
+              />
             </div>
 
-            <div className='flex flex-col  h-30 '>
-              <div className='flex flex-col p-3 gap-3'>
-
-              <input 
-                value={undefined}
-                 onChange={(e)=> e.target.value}
-                className="font-semibold border-1 border-blue-400 p-1 rounded focus:outline-none focus:ring-2 focus:ring-slate-400"
-                placeholder={link.text}
-                type="text" />
-
-                <input
-                value={undefined}
-                onChange={(e)=> e.target.value}
-                placeholder={link.url}
-                className="font-semibold border-1 border-blue-400 p-1 rounded focus:outline-none focus:ring-2 focus:ring-slate-400"
-                type="text" />
- 
-              </div>
-              <div className='flex  justify-end gap-3'>
-
-              <button 
-                // onClick={editHandle}
-                className="rounded-xl border px-3 py-2  hover:bg-zinc-100">
-                  Save
-                </button>
-
-                <button 
+            <div className="mt-6 flex justify-end gap-3">
+              <button
                 onClick={cancelEdit}
-                className="rounded-xl bg-black px-3 py-1 text-white hover:bg-zinc-800">
-                  Cancel
-                </button>
-              </div>
+                className="rounded-xl border border-zinc-300 px-5 py-2.5 font-medium text-zinc-600 transition hover:bg-zinc-100"
+              >
+                Cancel
+              </button>
 
+              <button
+              onClick={saveChanges}
+                className="rounded-xl bg-blue-600 px-6 py-2.5 font-medium text-white transition hover:bg-blue-700 active:scale-95"
+              >
+                Save Changes
+              </button>
             </div>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+          {/* Link Info */}
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-zinc-900">
+              {link.text}
+            </h3>
 
-</> ) :(
+            <p className="break-all text-sm text-zinc-500">{link.url}</p>
+          </div>
 
-<>
+          {/* Actions */}
+          <div className="flex gap-3">
+            <button
+              onClick={() => editHandle(link.id)}
+              className="rounded-xl border border-zinc-300 px-5 py-2.5 font-medium text-zinc-700 transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600"
+            >
+              ✏️ Edit
+            </button>
 
-              <div >
-                <h3 className="font-semibold">{link.text}</h3>
-
-                <p className="mt-1 text-sm text-zinc-500 break-all">
-                  {link.url}
-                </p>
-              </div>
-
-              <div className="flex gap-3">
-
-                <button 
-                onClick={()=> editHandle(link.id)}
-                className="rounded-xl border px-4 py-2 hover:bg-zinc-100">
-                  Edit
-                </button>
-
-                <button className="rounded-xl bg-black px-4 py-2 text-white hover:bg-zinc-800">
-                  Delete
-                </button>
-
-              </div>
-                  </>
-                  )}
-                   
-            </div>
-            </div>
-          
-
-
-      )
-}
-
-
-    
-    
-    </>
+            <button className="rounded-xl bg-red-500 px-5 py-2.5 font-medium text-white transition hover:bg-red-600 active:scale-95">
+              🗑 Delete
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  ))}
+</>
   )
 }
 
