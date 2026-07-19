@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { deleteLink, updateLink } from './actions'
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
 
 
 
@@ -9,6 +10,8 @@ const EditLink = ({ links, userid }) => {
   const [editlink, seteditlink] = useState(null)
   const [text, settext] = useState("")
   const [url, seturl] = useState("")
+
+const router = useRouter()
 
   function editHandle(link) {
     seteditlink(link.id),
@@ -34,7 +37,7 @@ const EditLink = ({ links, userid }) => {
     await updateLink(text, url, editlink, userid);
 
     toast("Link has been updated!");
-
+    router.refresh()
     seteditlink(null);
     settext("");
     seturl("");
@@ -43,18 +46,20 @@ const EditLink = ({ links, userid }) => {
   async function DeleteLinkfromDb(link){
     await deleteLink(link.id, userid)
     toast("Link has been deleted!")
+        router.refresh()
+
   }
 
 
-const getData = async() =>{
-  const response = await fetch('/api/links',({
-    method:'POST'
-  }))
-  const data = await  response.json()
-  console.log(data)
-}
+// const getData = async() =>{
+//   const response = await fetch('/api/links',({
+//     method:'POST'
+//   }))
+//   const data = await  response.json()
+//   console.log(data)
+// }
 
-getData()
+// getData()
 
   return (
     <>

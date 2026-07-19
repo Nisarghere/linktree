@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import { useRouter } from 'next/navigation'
 
 
 const AddLink = () => {
@@ -9,6 +10,8 @@ const AddLink = () => {
         text: "",
         url: ""
     })
+        const router = useRouter()
+
 
          const sendData = async () => {
              const response = await fetch('/api/links', ({
@@ -21,11 +24,15 @@ const AddLink = () => {
             // console.log(response)
 
             if (response.ok){
+
             toast("Link has been added")
-             } else{
+            router.refresh()
+
+            } 
+
+            else {
                 toast("Somethig went wrong")
             }
-
         }
 
  

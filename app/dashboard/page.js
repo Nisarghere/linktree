@@ -5,8 +5,9 @@ import Link from 'next/link'
  import jwt from 'jsonwebtoken'
 import { getLinksByUserId } from '../lib/db'
 import EditLink from './EditLink'
-import AddLink from './AddLink'
 
+import AddLink from './AddLink'
+ 
 const page = async() => {
   
 
