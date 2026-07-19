@@ -47,7 +47,7 @@ const page = async() => {
 
       {/* Add Link */}
       <section className="rounded-3xl bg-white p-8 shadow-sm h-fit">
-        <AddLink />
+        <AddLink userid={userid} />
 
       </section>
 

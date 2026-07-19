@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import { useRouter } from 'next/navigation'
+import { addLink } from './actions';
 
 
 const AddLink = () => {
@@ -10,37 +11,38 @@ const AddLink = () => {
         text: "",
         url: ""
     })
-        const router = useRouter()
+    const router = useRouter()
 
 
-         const sendData = async () => {
-             const response = await fetch('/api/links', ({
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(Addlink),
-            }))
-            // console.log(response)
-
-            if (response.ok){
-
-            toast("Link has been added")
-            router.refresh()
-
-            } 
-
-            else {
-                toast("Somethig went wrong")
-            }
+    const sendData = async () => {
+        if (!Addlink.text.trim() || !Addlink.url.trim()) {
+            toast("Text and URL are required");
+            return;
         }
 
- 
+        try {
+            await addLink(Addlink.text, Addlink.url);
+
+            toast("Link has been added");
+
+            setAddlink({
+                text: "",
+                url: "",
+            });
+
+            router.refresh();
+        } catch (err) {
+            toast("Something went wrong");
+            console.error(err);
+        }
+    };
+
+
 
     return (
 
         <div>
-          
+
             <section>
 
                 <h2 className="text-xl font-semibold mb-6">
@@ -64,7 +66,7 @@ const AddLink = () => {
                     />
 
                     <button
-                    onClick={sendData}
+                        onClick={sendData}
                         className="w-full rounded-2xl bg-black py-3 font-medium text-white transition hover:bg-zinc-800"
                     >
                         + Add Link
