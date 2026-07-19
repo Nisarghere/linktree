@@ -46,6 +46,16 @@ const EditLink = ({ links, userid }) => {
   }
 
 
+const getData = async() =>{
+  const response = await fetch('/api/links',({
+    method:'POST'
+  }))
+  const data = await  response.json()
+  console.log(data)
+}
+
+getData()
+
   return (
     <>
       <ToastContainer />

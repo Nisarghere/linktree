@@ -40,7 +40,7 @@ export async function POST(req) {
     
     await createLinktree(userid, pic, safeLinks);
     await createHandle(handle, userid)
-
+ 
     return Response.json({ success: true
      });
   } catch (err) {
