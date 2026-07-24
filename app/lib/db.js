@@ -32,13 +32,13 @@ export async function getHandle(userId) {
 
   return result.rows[0].handle;
 }
-export async function getLinksByUserId(userId) {
-  const res = await pool.query("SELECT * FROM links WHERE user_id = $1", [
-    userId,
-  ]);
+// export async function getLinksByUserId(userId) {
+//   const res = await pool.query("SELECT * FROM links WHERE user_id = $1", [
+//     userId,
+//   ]);
 
-  return res.rows;
-}
+//   return res.rows;
+// }
 
 export async function createUser(name, email, password) {
   const results = await pool.query(
@@ -59,8 +59,14 @@ export async function findUser(email, password) {
 }
 
 
-export async function getLinksByHandle(handle){
+export async function getUserByHandle(handle){
   const result = await pool.query("select id, name,handle from userdata where handle=$1", [handle],)
+
+  return result.rows[0]
+}
+
+export async function getLinksByUserId(userid){
+  const result = await pool.query("select id,text,url from links where user_id=$1", [userid])
 
   return result.rows
 }

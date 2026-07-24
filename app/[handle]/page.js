@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import jwt from "jsonwebtoken";
-import { getHandle, getLinksByUserId, getLinksByHandle } from "@/app/lib/db";
+import { getHandle, getLinksByUserId, getUserByHandle } from "@/app/lib/db";
 
 import {
   ArrowLeft,
@@ -12,39 +12,48 @@ import {
 } from "lucide-react";
 
 import { ChevronRight } from "lucide-react";
+import { use } from "react";
 
  
 export default async function Page({ params }) {
   const { handle } = await params;
 
-  const handleLinks = getLinksByHandle(handle)
+  
 
-  console.log(handleLinks)
-
+ 
   const cookieStore = await cookies();
   const token = cookieStore.get("session")?.value;
 
   const decoded = jwt.verify(token, process.env.JWT_SECRET);
   const userid = decoded.userId;
 
-  const links = await getLinksByUserId(userid);
+ 
+ 
+  const userResults = await getUserByHandle(handle)
+  console.log(userResults)
+  
 
-  const gethandle = await getHandle(userid);
+  if (!userResults){
+    return(
+    <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
+        No profile found for @{handle}
+      </div>)
+  }
+
+
+
+  const links =await getLinksByUserId(userResults.id)
+
+  console.log(links)
+
+
 
   
- 
-  // if (handle === gethandle) {
-  //   return (
-  //     <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
-  //       No profile exist such as @{handle}
-  //     </div>
-  //   );
-  // }
 
   if (!links || links.length === 0) {
     return (
       <div className="min-h-screen flex items-center justify-center text-xl font-semibold">
-        No profile found for @{handle}
+         @{handle} has not registered any links.
       </div>
     );
   }
@@ -78,14 +87,14 @@ export default async function Page({ params }) {
                 <div className={`h-32 w-32 rounded-full flex border-[6px] items-center justify-center  border-white shadow-xl bg-slate-300 `}>
                   <span className='text-3xl font-bold text-white'>
 
-                    {gethandle.substring(0,1).toUpperCase()}
+                    {userResults.handle.substring(0,1).toUpperCase()}
 
                   </span>
                 </div>
               </div>
 
               <h1 className="mt-2 text-xl font-bold text-zinc-900">
-                @{gethandle}
+                @{userResults.handle}
               </h1>
 
               <p className="mt-2 text-center text-zinc-500">
