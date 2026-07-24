@@ -31,6 +31,7 @@ export default function LoginPage() {
       localStorage.setItem("isLoggedIn", "true")
       router.push('/')
     }
+    
     else {
       toast('Login unsuccesful')
     }
