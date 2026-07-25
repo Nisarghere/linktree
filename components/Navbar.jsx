@@ -6,7 +6,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setuser] = useState(null);
   const [name, setname] = useState("");
-  console.log(name);
   const router = useRouter();
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Features", href: "/features" },
     { name: "Dashboard", href: "/dashboard" },
-   ];
+  ];
 
   return (
     <div
@@ -68,23 +67,22 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        <ul className="hidden md:flex gap-2">
+        <div>
+
+        <ul className="hidden md:flex gap-2 ">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="
-                      relative rounded-full px-4 py-2 text-sm font-medium text-zinc-600 transition-all duration-300
-                      hover:bg-zinc-100
-                      hover:text-black
-                      hover:-translate-y-0.5
-                      "
+                className="rounded-full px-4 py-2 text-sm font-medium text-zinc-600 transition-all duration-300  hover:bg-zinc-100  hover:text-black hover:-translate-y-0.5 "
               >
                 {link.name}
               </Link>
             </li>
           ))}
+          
         </ul>
+        </div>
 
         {/* Desktop Buttons */}
 

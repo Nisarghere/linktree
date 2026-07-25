@@ -10,8 +10,10 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [isLoggedin, setisLoggedin] = useState(false)
   const router = useRouter()
+
   async function sendData(e) {
     e.preventDefault()
+    console.log('clicked....')
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
