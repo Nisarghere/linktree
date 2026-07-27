@@ -43,7 +43,7 @@ const Generate = () => {
     }
 
     const canaddlink = () => {
-        return links.every((link) => link.url.trim() !== '' && link.text.trim() !== '')
+        return links.every((link) => link.url.trim() !== '' && link.text.trim() !== '') && links.length < 5
     }
 
     const cancreate = () => {

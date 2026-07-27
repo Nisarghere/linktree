@@ -7,7 +7,7 @@ export const pool = new Pool({
   },
 });
 
-export async function createLinktree(user_id, pic, links) {
+export async function createLinktree(user_id,links, pic) {
   for (const link of links) {
     if (!link?.url || !link?.text) continue;
 
@@ -61,6 +61,11 @@ export async function findUser(email, password) {
 
 export async function getUserByHandle(handle){
   const result = await pool.query("select id, name,handle from userdata where handle=$1", [handle],)
+
+  return result.rows[0]
+}
+export async function getUserById(user_id){
+  const result = await pool.query("select id, name,handle from userdata where user_id=$1", [user_id],)
 
   return result.rows[0]
 }
