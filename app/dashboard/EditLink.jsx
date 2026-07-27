@@ -59,6 +59,7 @@ const EditLink = ({ links, userid }) => {
       cancelEdit();
 
       router.refresh();
+
     } catch (error) {
       console.error(error);
       toast("Failed to update link");
@@ -77,6 +78,7 @@ const EditLink = ({ links, userid }) => {
       toast("Link has been deleted!");
 
       router.refresh();
+      
     } catch (error) {
       console.error(error);
       toast("Failed to delete link");

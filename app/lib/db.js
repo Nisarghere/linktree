@@ -65,7 +65,7 @@ export async function getUserByHandle(handle){
   return result.rows[0]
 }
 export async function getUserById(user_id){
-  const result = await pool.query("select id, name,handle from userdata where user_id=$1", [user_id],)
+  const result = await pool.query("select id, name,handle from userdata where id=$1", [user_id],)
 
   return result.rows[0]
 }
