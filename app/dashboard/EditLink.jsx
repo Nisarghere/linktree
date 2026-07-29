@@ -70,6 +70,7 @@ const EditLink = ({ links, userid }) => {
 
   // Delete link
   async function DeleteLinkfromDb(link) {
+    
     try {
       setDeletingId(link.id);
 
