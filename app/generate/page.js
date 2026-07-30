@@ -18,9 +18,9 @@ export default async function Page() {
 
    const user = await getUserById(decoded.userId)
 
-   if(user?.handle){
-    redirect('/dashboard')
-   }
+  //  if(user?.handle){
+  //   redirect('/dashboard')
+  //  }
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Generate />
