@@ -50,104 +50,154 @@ const AddLink = ({ links }) => {
   };
 
   return (
-    <>
-      <ToastContainer position="bottom-right" />
+   <>
+  <ToastContainer position="bottom-right" />
 
-      <div>
-        {/* Header */}
-        <div className="mb-7">
-          <div className="flex items-center justify-between">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-950 text-lg text-white shadow-sm">
-              +
-            </div>
-
-            <span className="text-xs font-medium text-zinc-400">
-              {links.length}/5 links
-            </span>
+  <div>
+    {/* Claim Handle */}
+    {/* {!handle && ( */}
+      <div className="mb-8 rounded-3xl border border-zinc-200 bg-zinc-50 p-5">
+        <div className="mb-5">
+          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-950 text-lg text-white shadow-sm">
+            @
           </div>
 
           <h2 className="mt-5 text-xl font-semibold tracking-tight text-zinc-950">
-            Add New Link
+            Claim Your Handle
           </h2>
 
           <p className="mt-2 text-sm leading-6 text-zinc-500">
-            Add a new destination to your profile.
+            Choose a unique handle for your profile.
           </p>
         </div>
 
-        {/* Form */}
         <div className="space-y-4">
-          {/* Title */}
+          {/* Handle Input */}
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-700">
-              Link title
+              Your handle
             </label>
 
-            <input
-              value={Addlink.text}
-              onChange={(e) =>
-                setAddlink({
-                  ...Addlink,
-                  text: e.target.value,
-                })
-              }
-              type="text"
-              placeholder="My Instagram"
-              className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-sm text-zinc-900 outline-none transition-all duration-200 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/5"
-            />
-          </div>
+            <div className="flex items-center overflow-hidden rounded-2xl border border-zinc-200 bg-white transition-all duration-200 focus-within:border-zinc-900 focus-within:ring-4 focus-within:ring-zinc-900/5">
+              <span className="pl-4 text-sm text-zinc-400">
+                yoursite.com/
+              </span>
 
-          {/* URL */}
-          <div>
-            <label className="mb-2 block text-sm font-medium text-zinc-700">
-              URL
-            </label>
-
-            <input
-              value={Addlink.url}
-              onChange={(e) =>
-                setAddlink({
-                  ...Addlink,
-                  url: e.target.value,
-                })
-              }
-              type="url"
-              placeholder="https://example.com"
-              className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-sm text-zinc-900 outline-none transition-all duration-200 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/5"
-            />
-          </div>
-
-          {/* Button */}
-          <button
-            disabled={limitReached || loading}
-            onClick={sendData}
-            className="group relative w-full overflow-hidden rounded-2xl bg-zinc-950 py-3.5 font-medium text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-zinc-200 disabled:text-zinc-400 disabled:shadow-none"
-          >
-            <span className="relative z-10">
-              {loading
-                ? "Adding..."
-                : limitReached
-                  ? "Link Limit Reached"
-                  : "Add Link"}
-            </span>
-          </button>
-
-          {/* Limit message */}
-          {limitReached && (
-            <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
-              <p className="text-sm font-medium text-amber-800">
-                You've reached your 5-link limit.
-              </p>
-
-              <p className="mt-1 text-xs text-amber-700">
-                Delete an existing link to add a new one.
-              </p>
+              <input
+                // value={handle}
+                // onChange={(e) => setHandle(e.target.value)}
+                type="text"
+                placeholder="yourname"
+                className="w-full bg-transparent px-2 py-3.5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400"
+              />
             </div>
-          )}
+          </div>
+
+          {/* Claim Button */}
+          <button
+            // disabled={!handle.trim() || handleLoading}
+            // onClick={claimHandle}
+            className="w-full rounded-2xl bg-zinc-950 py-3.5 font-medium text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-zinc-200 disabled:text-zinc-400 disabled:shadow-none"
+          >Claim
+            {/* {handleLoading ? "Claiming..." : "Claim Handle"} */}
+          </button>
         </div>
       </div>
-    </>
-  );
+    
+
+    {/* Header */}
+    <div className="mb-7">
+      <div className="flex items-center justify-between">
+        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-950 text-lg text-white shadow-sm">
+          +
+        </div>
+
+        <span className="text-xs font-medium text-zinc-400">
+          {links.length}/5 links
+        </span>
+      </div>
+
+      <h2 className="mt-5 text-xl font-semibold tracking-tight text-zinc-950">
+        Add New Link
+      </h2>
+
+      <p className="mt-2 text-sm leading-6 text-zinc-500">
+        Add a new destination to your profile.
+      </p>
+    </div>
+
+    {/* Link Form */}
+    <div className="space-y-4">
+      {/* Title */}
+      <div>
+        <label className="mb-2 block text-sm font-medium text-zinc-700">
+          Link title
+        </label>
+
+        <input
+          value={Addlink.text}
+          onChange={(e) =>
+            setAddlink({
+              ...Addlink,
+              text: e.target.value,
+            })
+          }
+          type="text"
+          placeholder="My Instagram"
+          className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-sm text-zinc-900 outline-none transition-all duration-200 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/5"
+        />
+      </div>
+
+      {/* URL */}
+      <div>
+        <label className="mb-2 block text-sm font-medium text-zinc-700">
+          URL
+        </label>
+
+        <input
+          value={Addlink.url}
+          onChange={(e) =>
+            setAddlink({
+              ...Addlink,
+              url: e.target.value,
+            })
+          }
+          type="url"
+          placeholder="https://example.com"
+          className="w-full rounded-2xl border border-zinc-200 bg-zinc-50 px-4 py-3.5 text-sm text-zinc-900 outline-none transition-all duration-200 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/5"
+        />
+      </div>
+
+      {/* Button */}
+      <button
+        disabled={limitReached || loading}
+        onClick={sendData}
+        className="group relative w-full overflow-hidden rounded-2xl bg-zinc-950 py-3.5 font-medium text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-zinc-200 disabled:text-zinc-400 disabled:shadow-none"
+      >
+        <span className="relative z-10">
+          {loading
+            ? "Adding..."
+            : limitReached
+              ? "Link Limit Reached"
+              : "Add Link"}
+        </span>
+      </button>
+
+      {/* Limit message */}
+      {limitReached && (
+        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3">
+          <p className="text-sm font-medium text-amber-800">
+            You've reached your 5-link limit.
+          </p>
+
+          <p className="mt-1 text-xs text-amber-700">
+            Delete an existing link to add a new one.
+          </p>
+        </div>
+      )}
+    </div>
+  </div>
+</>  );
 };
 
 export default AddLink;

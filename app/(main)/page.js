@@ -10,7 +10,7 @@ const page = () => {
   const router = useRouter()
 
   function createtree() {
-    router.push(`/generate?handle=${text}`)
+    router.push(`/dashboard?handle=${text}`)
   }
 
   return (
