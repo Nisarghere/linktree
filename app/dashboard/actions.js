@@ -59,3 +59,21 @@ export async function deleteLink(id, userid) {
 
   return result.rows[0];
 }
+
+export async function createHandle(handle, userId) {
+  try{
+     const cookieStore = await cookies();
+    const token = cookieStore.get("session")?.value;
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userid = decoded.userId;
+    const result = await pool.query("update userdata set handle=$1 where id=$2", [
+      handle,
+      userId,
+    ]);
+  } catch(err){
+    return Response.json({
+      success:false
+    })
+  }
+}

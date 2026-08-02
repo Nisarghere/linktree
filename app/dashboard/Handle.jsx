@@ -1,110 +1,56 @@
-"use client";
+"use client"
+import React, { useState } from 'react'
 
-import React, { useState } from "react";
-import { toast } from "react-toastify";
+import { createHandle } from './actions'
 
-const HandleCard = ({ handle }) => {
-  const [newHandle, setNewHandle] = useState("");
-  const [loading, setLoading] = useState(false);
+const Handle =  () => {
+  const [handle, sethandle] = useState("")
 
-  async function claimHandle() {
-    if (!newHandle.trim()) {
-      toast("Please enter a handle");
-      return;
-    }
-
-    try {
-      setLoading(true);
-
-      // We will connect your claim-handle API/action here
-      console.log("Claiming handle:", newHandle);
-
-      toast("Handle claimed successfully!");
-    } catch (error) {
-      console.error(error);
-      toast("Failed to claim handle");
-    } finally {
-      setLoading(false);
-    }
-  }
-
+  
+  
   return (
-    <section className="rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm sm:p-7">
-      {handle ? (
-        /* ================= HANDLE EXISTS ================= */
+    <div>
+       {/* Claim Handle */}
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex min-w-0 items-center gap-4">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-zinc-950 text-lg font-semibold text-white">
-              @
+              <div>
+                <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-[#19352B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#19352B]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#78927F]" />
+                  Your profile
+                </div>
+
+                <h2 className="text-xl font-semibold tracking-tight text-[#19352B]">
+                  Claim your handle
+                </h2>
+
+                <p className="mt-1.5 text-sm leading-6 text-[#647168]">
+                  Choose the username people will use to find your profile.
+                </p>
+              </div>
+
+              {/* Handle Input */}
+              <div className="flex w-full max-w-xl flex-col gap-2 sm:flex-row">
+                <div className="flex flex-1 items-center overflow-hidden rounded-xl border border-[#C9D3CA] bg-[#FDFCFA] shadow-sm focus-within:border-[#19352B] focus-within:ring-4 focus-within:ring-[#19352B]/5">
+                  <span className="whitespace-nowrap pl-4 text-sm font-medium text-[#89958C]">
+                    linktree.com/
+                  </span>
+
+                  <input
+                  value={handle}
+                  onChange={(e)=> sethandle(e.target.value)}
+                    type="text"
+                    placeholder="yourhandle"
+                    className="min-w-0 flex-1 bg-transparent px-2 py-3.5 text-sm font-medium text-[#19352B] outline-none placeholder:text-[#A7B0A9]"
+                  />
+                </div>
+
+                <button className="rounded-xl bg-[#19352B] px-6 py-3.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#27483A] active:translate-y-0">
+                  Claim handle
+                </button>
+              </div>
             </div>
+    </div>
+  )
+}
 
-            <div className="min-w-0">
-              <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
-                Your profile
-              </p>
-
-              <h2 className="mt-1 truncate text-lg font-semibold text-zinc-950">
-                yoursite.com/{handle}
-              </h2>
-            </div>
-          </div>
-
-          <button
-            onClick={() => navigator.clipboard.writeText(`yoursite.com/${handle}`)}
-            className="shrink-0 rounded-xl border border-zinc-200 px-4 py-2.5 text-sm font-medium text-zinc-700 transition-all duration-200 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-sm active:scale-95"
-          >
-            Copy Link
-          </button>
-        </div>
-      ) : (
-        /* ================= CLAIM HANDLE ================= */
-
-        <div>
-          {/* Header */}
-          <div className="mb-6">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-950 text-lg font-semibold text-white">
-              @
-            </div>
-
-            <h2 className="mt-5 text-xl font-semibold tracking-tight text-zinc-950">
-              Claim your handle
-            </h2>
-
-            <p className="mt-2 max-w-xl text-sm leading-6 text-zinc-500">
-              Choose a unique handle for your profile. This will be the link
-              people use to find your page.
-            </p>
-          </div>
-
-          {/* Form */}
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <div className="flex min-w-0 flex-1 items-center overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 transition-all duration-200 focus-within:border-zinc-900 focus-within:bg-white focus-within:ring-4 focus-within:ring-zinc-900/5">
-              <span className="shrink-0 pl-4 text-sm text-zinc-400">
-                yoursite.com/
-              </span>
-
-              <input
-                value={newHandle}
-                onChange={(e) => setNewHandle(e.target.value)}
-                type="text"
-                placeholder="yourname"
-                className="min-w-0 w-full bg-transparent px-2 py-3.5 text-sm text-zinc-900 outline-none placeholder:text-zinc-400"
-              />
-            </div>
-
-            <button
-              onClick={claimHandle}
-              disabled={!newHandle.trim() || loading}
-              className="shrink-0 rounded-2xl bg-zinc-950 px-6 py-3.5 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-md active:translate-y-0 disabled:cursor-not-allowed disabled:translate-y-0 disabled:bg-zinc-200 disabled:text-zinc-400 disabled:shadow-none"
-            >
-              {loading ? "Claiming..." : "Claim Handle"}
-            </button>
-          </div>
-        </div>
-      )}
-    </section>
-  );
-};
-
-export default HandleCard;
+export default Handle

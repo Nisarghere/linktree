@@ -16,30 +16,24 @@ const EditLink = ({ links, userid }) => {
 
   const router = useRouter();
 
-  // Start editing
   function editHandle(link) {
     setEditingLink(link);
-
     setText(link.text);
     setUrl(link.url);
   }
 
-  // Cancel editing
   function cancelEdit() {
     setEditingLink(null);
-
     setText("");
     setUrl("");
   }
 
-  // Save changes
   async function saveChanges() {
     if (!text.trim() || !url.trim()) {
       toast("Title or URL is missing!");
       return;
     }
 
-    // Check if nothing changed
     if (
       editingLink &&
       text.trim() === editingLink.text &&
@@ -59,7 +53,6 @@ const EditLink = ({ links, userid }) => {
       cancelEdit();
 
       router.refresh();
-
     } catch (error) {
       console.error(error);
       toast("Failed to update link");
@@ -68,9 +61,7 @@ const EditLink = ({ links, userid }) => {
     }
   }
 
-  // Delete link
   async function DeleteLinkfromDb(link) {
-    
     try {
       setDeletingId(link.id);
 
@@ -79,7 +70,6 @@ const EditLink = ({ links, userid }) => {
       toast("Link has been deleted!");
 
       router.refresh();
-      
     } catch (error) {
       console.error(error);
       toast("Failed to delete link");
@@ -92,44 +82,50 @@ const EditLink = ({ links, userid }) => {
     <>
       <ToastContainer position="bottom-right" />
 
-      <div className="space-y-4">
+      <div className="space-y-3">
+
         {links.map((link, index) => (
+
           <div
             key={link.id}
-            className={`group rounded-2xl border bg-white p-5 transition-all duration-300 ${
+            className={`rounded-2xl border bg-[#FDFCFA] p-4 transition-all duration-300 ${
               editingLink?.id === link.id
-                ? "border-zinc-400 shadow-md"
-                : "border-zinc-200 hover:-translate-y-0.5 hover:border-zinc-300 hover:shadow-md"
+                ? "border-[#78927F] shadow-md shadow-[#19352B]/5"
+                : "border-[#E0E3DE] hover:-translate-y-0.5 hover:border-[#C8D1C9] hover:shadow-sm"
             }`}
           >
+
             {editingLink?.id === link.id ? (
+
               /* ================= EDIT MODE ================= */
 
               <div>
-                {/* Edit Header */}
-                <div className="mb-5 flex items-center justify-between">
+
+                <div className="mb-6 flex items-center justify-between">
+
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-widest text-zinc-400">
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#78927F]">
                       Editing link
                     </p>
 
-                    <h3 className="mt-1 font-semibold text-zinc-900">
+                    <h3 className="mt-1 font-semibold text-[#19352B]">
                       Update your link
                     </h3>
                   </div>
 
                   <button
                     onClick={cancelEdit}
-                    className="flex h-8 w-8 items-center justify-center rounded-full text-zinc-400 transition hover:bg-zinc-100 hover:text-zinc-700"
+                    className="flex h-8 w-8 items-center justify-center rounded-full text-[#8C968F] transition hover:bg-[#EEF1ED] hover:text-[#19352B]"
                   >
                     ×
                   </button>
+
                 </div>
 
-                {/* Inputs */}
                 <div className="space-y-4">
+
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-zinc-700">
+                    <label className="mb-2 block text-sm font-semibold text-[#3E4B43]">
                       Link title
                     </label>
 
@@ -137,12 +133,12 @@ const EditLink = ({ links, userid }) => {
                       value={text}
                       onChange={(e) => setText(e.target.value)}
                       placeholder="Link title"
-                      className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/5"
+                      className="w-full rounded-xl border border-[#DDE1DB] bg-[#F7F8F5] px-4 py-3 text-sm text-[#19352B] outline-none transition-all duration-200 placeholder:text-[#A2AAA3] focus:border-[#78927F] focus:bg-white focus:ring-4 focus:ring-[#78927F]/10"
                     />
                   </div>
 
                   <div>
-                    <label className="mb-2 block text-sm font-medium text-zinc-700">
+                    <label className="mb-2 block text-sm font-semibold text-[#3E4B43]">
                       URL
                     </label>
 
@@ -150,17 +146,18 @@ const EditLink = ({ links, userid }) => {
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
                       placeholder="https://example.com"
-                      className="w-full rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm outline-none transition-all duration-200 placeholder:text-zinc-400 hover:border-zinc-300 focus:border-zinc-900 focus:bg-white focus:ring-4 focus:ring-zinc-900/5"
+                      className="w-full rounded-xl border border-[#DDE1DB] bg-[#F7F8F5] px-4 py-3 text-sm text-[#19352B] outline-none transition-all duration-200 placeholder:text-[#A2AAA3] focus:border-[#78927F] focus:bg-white focus:ring-4 focus:ring-[#78927F]/10"
                     />
                   </div>
+
                 </div>
 
-                {/* Buttons */}
                 <div className="mt-5 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+
                   <button
                     onClick={cancelEdit}
                     disabled={loading}
-                    className="rounded-xl border border-zinc-200 px-5 py-2.5 text-sm font-medium text-zinc-600 transition hover:bg-zinc-50 disabled:opacity-50"
+                    className="rounded-xl border border-[#DDE1DB] px-5 py-2.5 text-sm font-semibold text-[#647168] transition hover:bg-[#F5F3ED] disabled:opacity-50"
                   >
                     Cancel
                   </button>
@@ -168,39 +165,46 @@ const EditLink = ({ links, userid }) => {
                   <button
                     onClick={saveChanges}
                     disabled={loading}
-                    className="rounded-xl bg-zinc-950 px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-zinc-800 active:scale-95 disabled:cursor-not-allowed disabled:bg-zinc-300"
+                    className="rounded-xl bg-[#19352B] px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-[#27483A] active:scale-95 disabled:cursor-not-allowed disabled:bg-[#DDE2DC]"
                   >
                     {loading ? "Saving..." : "Save Changes"}
                   </button>
+
                 </div>
               </div>
+
             ) : (
+
               /* ================= NORMAL MODE ================= */
 
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
                 {/* Link Information */}
                 <div className="flex min-w-0 items-center gap-4">
-                  {/* Number */}
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-sm font-semibold text-zinc-500">
+
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E9EFE8] text-xs font-bold tracking-wide text-[#527060]">
                     {String(index + 1).padStart(2, "0")}
                   </div>
 
                   <div className="min-w-0">
-                    <h3 className="truncate font-semibold text-zinc-900">
+
+                    <h3 className="truncate font-semibold text-[#19352B]">
                       {link.text}
                     </h3>
 
-                    <p className="mt-1 truncate text-sm text-zinc-500">
+                    <p className="mt-1 truncate text-sm text-[#89948C]">
                       {link.url}
                     </p>
+
                   </div>
                 </div>
 
                 {/* Actions */}
                 <div className="flex shrink-0 gap-2">
+
                   <button
                     onClick={() => editHandle(link)}
-                    className="rounded-xl border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition-all duration-200 hover:border-zinc-300 hover:bg-zinc-50 hover:shadow-sm active:scale-95"
+                    className="rounded-xl border border-[#DDE1DB] bg-[#FDFCFA] px-4 py-2 text-sm font-semibold text-[#526158] transition-all duration-200 hover:border-[#BFCAC1] hover:bg-[#F5F3ED] active:scale-95"
                   >
                     Edit
                   </button>
@@ -208,11 +212,13 @@ const EditLink = ({ links, userid }) => {
                   <button
                     onClick={() => DeleteLinkfromDb(link)}
                     disabled={deletingId === link.id}
-                    className="rounded-xl border border-red-100 bg-red-50 px-4 py-2 text-sm font-medium text-red-600 transition-all duration-200 hover:border-red-200 hover:bg-red-100 active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="rounded-xl border border-[#E8CFC1] bg-[#FBF0E9] px-4 py-2 text-sm font-semibold text-[#9A634B] transition-all duration-200 hover:border-[#DDBBA8] hover:bg-[#F8E7DD] active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {deletingId === link.id ? "Deleting..." : "Delete"}
                   </button>
+
                 </div>
+
               </div>
             )}
           </div>
