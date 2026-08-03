@@ -47,6 +47,10 @@ const page = async () => {
 
             {/* Page title */}
             <div className="hidden items-center gap-3 md:flex">
+               <span className="text-sm font-medium text-[#C7D2C9]">
+                Add 
+              </span>
+              <span className="h-5 w-px bg-white/15" />
               <span className="h-5 w-px bg-white/15" />
 
               <span className="text-sm font-medium text-[#C7D2C9]">
@@ -65,7 +69,7 @@ const page = async () => {
           </div>
         </header>
         <section className="mb-6 mt-6 overflow-hidden rounded-3xl border border-[#D9DED6] bg-[#E9EFE8] p-6 shadow-sm sm:p-7">
-          <Handle />
+          <Handle userid={userid} />
         </section>
         {/* Main */}
         <main className="pb-16 pt-8 sm:pt-10">

@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import Generate from './GeneratePage'
 import { redirect } from 'next/navigation'
 import jwt from 'jsonwebtoken'
-import { getUserById } from '../lib/db'
+import { getUserById } from '../app/lib/db'
 import { cookies } from 'next/headers'
 
 
