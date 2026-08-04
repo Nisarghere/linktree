@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import jwt from "jsonwebtoken";
-import { getLinksByUserId } from "../lib/db";
+import { getLinksByUserId, getUserById } from "../lib/db";
 import EditLink from "./EditLink";
 import AddLink from "./AddLink";
 import { createHandle } from "./actions";
@@ -20,6 +20,7 @@ const page = async () => {
   const userid = decoded.userId;
 
   const links = await getLinksByUserId(userid);
+  const data = await getUserById(userid);
 
   return (
     <div className="min-h-screen bg-[#F5F3ED] text-[#19352B]">
@@ -47,9 +48,7 @@ const page = async () => {
 
             {/* Page title */}
             <div className="hidden items-center gap-3 md:flex">
-               <span className="text-sm font-medium text-[#C7D2C9]">
-                Add 
-              </span>
+              <span className="text-sm font-medium text-[#C7D2C9]">Add</span>
               <span className="h-5 w-px bg-white/15" />
               <span className="h-5 w-px bg-white/15" />
 
@@ -68,9 +67,10 @@ const page = async () => {
             </div>
           </div>
         </header>
-        <section className="mb-6 mt-6 overflow-hidden rounded-3xl border border-[#D9DED6] bg-[#E9EFE8] p-6 shadow-sm sm:p-7">
-          <Handle userid={userid} />
-        </section>
+        {!data.handle && (
+            <Handle userid={userid} />
+        )}
+
         {/* Main */}
         <main className="pb-16 pt-8 sm:pt-10">
           {/* Main Grid */}
