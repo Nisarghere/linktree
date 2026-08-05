@@ -141,14 +141,9 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link
-                href="/profile"
-                className="group relative flex items-center gap-3 overflow-hidden rounded-full border border-zinc-200/80 bg-white/90 px-3 py-2 backdrop-blur-md shadow-md transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-2xl hover:shadow-zinc-300/30 active:scale-[0.98]"
-              >
-                {/* Shine Effect */}
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
-                {/* Avatar */}
-                <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br  from-sky-500 to-cyan-500 shadow-lg shadow-emerald-500/30 transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
+              <div className="relative flex items-center group">
+                {/* Avatar Button */}
+                <button className="relative z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 shadow-lg transition-all duration-300 hover:scale-105">
                   <svg
                     className="h-5 w-5 text-white"
                     fill="none"
@@ -162,38 +157,29 @@ const Navbar = () => {
                       d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                     />
                   </svg>
+                </button>
+
+                {/* Sliding Panel */}
+                <div className="absolute left-5 overflow-hidden rounded-full border border-zinc-200 bg-white shadow-xl transition-all duration-300 ease-out w-0 opacity-0 group-focus-within:w-64 group-focus-within:opacity-100 group-hover:w-64 group-hover:opacity-100">
+                  <div className="flex items-center pl-8">
+                    <Link
+                      href="#"
+                      className="px-5 py-3 text-sm font-semibold text-zinc-800 hover:bg-zinc-100 transition-colors whitespace-nowrap"
+                    >
+                      Profile
+                    </Link>
+
+                    <div className="h-6 w-px bg-zinc-200" />
+
+                    <Link
+                      href="#"
+                      className="px-5 py-3 text-sm font-semibold text-sky-600 underline hover:bg-zinc-100 transition-colors whitespace-nowrap"
+                    >
+                      @username
+                    </Link>
+                  </div>
                 </div>
-                {/* Name */}
-                <div className="relative flex flex-col">
-                  <span className="text-sm font-semibold text-zinc-800 transition-colors duration-300 group-hover:text-black">
-                    {name}
-                  </span>
-                  <span className="text-xs text-zinc-500 transition-colors duration-300 group-hover:text-zinc-700">
-                    View Profile
-                  </span>
-                </div>
-                ||
-                <div className="relative flex flex-col">
-                  <span className="text-sm font-semibold underline text-zinc-800 transition-colors duration-300 group-hover:text-black">
-                   @username
-                  </span>
-                  
-                </div>
-                {/* Arrow */}
-                <svg
-                  className="ml-auto h-4 w-4 text-zinc-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-zinc-700"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </Link>
+              </div>
               <button
                 onClick={handleLogout}
                 className="group relative inline-flex cursor-pointer items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-red-500 via-rose-500 to-red-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-red-500/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.03] hover:shadow-2xl hover:shadow-red-500/40 active:translate-y-0 active:scale-95"
