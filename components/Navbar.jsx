@@ -142,8 +142,9 @@ const Navbar = () => {
           ) : (
             <>
               <div className="relative flex items-center group">
-                {/* Avatar Button */}
-                <button className="relative z-20 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 shadow-lg transition-all duration-300 hover:scale-105">
+                 {/* Avatar */}
+                <button className="relative z-20 -mr-2 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 shadow-lg transition-all duration-300 hover:scale-105">
+                  {" "}
                   <svg
                     className="h-5 w-5 text-white"
                     fill="none"
@@ -160,7 +161,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Sliding Panel */}
-                <div className="absolute left-5 overflow-hidden rounded-full border border-zinc-200 bg-white shadow-xl transition-all duration-300 ease-out w-0 opacity-0 group-focus-within:w-64 group-focus-within:opacity-100 group-hover:w-64 group-hover:opacity-100">
+                <div className="absolute right-0 origin-right overflow-hidden rounded-full border border-zinc-200 bg-white shadow-xl transition-all duration-300 ease-out w-0 opacity-0 group-hover:w-64 group-hover:opacity-100">
                   <div className="flex items-center pl-8">
                     <Link
                       href="#"
