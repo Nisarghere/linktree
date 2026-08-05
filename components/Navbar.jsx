@@ -28,9 +28,7 @@ const Navbar = () => {
       method: "POST",
     });
     const resp = await result.json();
-    router.push("/login");
     setuser(null);
-    console.log(resp);
   }
 
   const navLinks = [
@@ -68,20 +66,18 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <div>
-
-        <ul className="hidden md:flex gap-2 ">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-medium text-zinc-600 transition-all duration-300  hover:bg-zinc-100  hover:text-black hover:-translate-y-0.5 "
-              >
-                {link.name}
-              </Link>
-            </li>
-          ))}
-          
-        </ul>
+          <ul className="hidden md:flex gap-2 ">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="rounded-full px-4 py-2 text-sm font-medium text-zinc-600 transition-all duration-300  hover:bg-zinc-100  hover:text-black hover:-translate-y-0.5 "
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Desktop Buttons */}
@@ -151,7 +147,6 @@ const Navbar = () => {
               >
                 {/* Shine Effect */}
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
-
                 {/* Avatar */}
                 <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br  from-sky-500 to-cyan-500 shadow-lg shadow-emerald-500/30 transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
                   <svg
@@ -168,7 +163,6 @@ const Navbar = () => {
                     />
                   </svg>
                 </div>
-
                 {/* Name */}
                 <div className="relative flex flex-col">
                   <span className="text-sm font-semibold text-zinc-800 transition-colors duration-300 group-hover:text-black">
@@ -178,7 +172,13 @@ const Navbar = () => {
                     View Profile
                   </span>
                 </div>
-
+                ||
+                <div className="relative flex flex-col">
+                  <span className="text-sm font-semibold underline text-zinc-800 transition-colors duration-300 group-hover:text-black">
+                   @username
+                  </span>
+                  
+                </div>
                 {/* Arrow */}
                 <svg
                   className="ml-auto h-4 w-4 text-zinc-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-zinc-700"
