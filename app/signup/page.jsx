@@ -36,7 +36,7 @@ export default function SignupPage() {
         console.log('Sign up failed')
       }
     } catch (err) {
-      console.log('Requet failed', err)
+      console.log('Requet failed', err, 'not found')
     }
 
   }

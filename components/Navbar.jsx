@@ -6,22 +6,29 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setuser] = useState(null);
   const [name, setname] = useState("");
+  const [handle, sethandle] = useState("");
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch("/api/profile");
-      const resp = await result.json();
+  try {
+    useEffect(() => {
+      const fetchData = async () => {
+        const result = await fetch("/api/profile");
+        const resp = await result.json();
+        console.log(resp.handle);
 
-      if (result.ok) {
-        setuser(resp);
-        setname(resp.name);
-      } else {
-        setuser(null);
-      }
-    };
-    fetchData();
-  }, []);
+        if (result.ok) {
+          setuser(resp);
+          setname(resp.name);
+          sethandle(resp.handle);
+        } else {
+          setuser(null);
+        }
+      };
+      fetchData();
+    }, []);
+  } catch (err) {
+    console.log("Runtime error:", err);
+  }
 
   async function handleLogout() {
     const result = await fetch("/api/logout", {
@@ -142,8 +149,8 @@ const Navbar = () => {
           ) : (
             <>
               <div className="relative flex items-center group">
-                 {/* Avatar */}
-                <button className="relative z-20 -mr-2 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 shadow-lg transition-all duration-300 hover:scale-105">
+                {/* Avatar */}
+                <button className="relative z-20 -mr-2 group-hover:mr-1 flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-cyan-500 shadow-lg transition-all duration-300 hover:scale-105">
                   {" "}
                   <svg
                     className="h-5 w-5 text-white"
@@ -161,23 +168,30 @@ const Navbar = () => {
                 </button>
 
                 {/* Sliding Panel */}
-                <div className="absolute right-0 origin-right overflow-hidden rounded-full border border-zinc-200 bg-white shadow-xl transition-all duration-300 ease-out w-0 opacity-0 group-hover:w-64 group-hover:opacity-100">
+                <div className="absolute right-0 origin-right  overflow-hidden rounded-full border border-zinc-200 bg-white shadow-xl transition-all duration-300 ease-out w-0 opacity-0  group-hover:w-68 group-hover:opacity-100">
                   <div className="flex items-center pl-8">
                     <Link
                       href="#"
-                      className="px-5 py-3 text-sm font-semibold text-zinc-800 hover:bg-zinc-100 transition-colors whitespace-nowrap"
+                      className=" relative px-5 py-3 text-sm font-semibold text-zinc-800 hover:bg-zinc-100 transition-colors whitespace-nowrap"
                     >
-                      Profile
+                      {name}
                     </Link>
 
                     <div className="h-6 w-px bg-zinc-200" />
-
-                    <Link
-                      href="#"
+                  {
+                    handle ? (<Link
+                      href={handle}
                       className="px-5 py-3 text-sm font-semibold text-sky-600 underline hover:bg-zinc-100 transition-colors whitespace-nowrap"
                     >
+                      @{handle}
+                    </Link>) : (<Link
+                      href="#"
+                      className="px-5 py-3 text-sm font-semibold text-slate-600 underline hover:bg-zinc-100 transition-colors whitespace-nowrap"
+                    >
                       @username
-                    </Link>
+                    </Link>)
+                  }
+                    
                   </div>
                 </div>
               </div>
