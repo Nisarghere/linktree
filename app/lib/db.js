@@ -18,12 +18,12 @@ export async function createLinktree(user_id,links, pic) {
   }
 }
 
-// export async function createHandle(handle, userId) {
-//   const result = await pool.query("update userdata set handle=$1 where id=$2", [
-//     handle,
-//     userId,
-//   ]);
-// }
+export async function createHandle(handle, userId) {
+  const result = await pool.query("update userdata set handle=$1 where id=$2", [
+    handle,
+    userId,
+  ]);
+}
 
 export async function getHandle(userId) {
   const result = await pool.query("select handle from userdata where id=$1", [
