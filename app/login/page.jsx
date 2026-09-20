@@ -12,8 +12,10 @@ export default function LoginPage() {
   const router = useRouter()
 
   async function sendData(e) {
-    e.preventDefault()
-    console.log('clicked....')
+  e.preventDefault()
+  console.log('clicked....')
+
+  try {
     const response = await fetch('/api/login', {
       method: 'POST',
       headers: {
@@ -23,21 +25,21 @@ export default function LoginPage() {
         email,
         password
       })
-    }
-
-    )
+    })
 
     if (response.ok) {
       toast('Login succesful')
       setisLoggedin(true)
       localStorage.setItem("isLoggedIn", "true")
       router.push('/')
-    }
-    
-    else {
+    } else {
       toast('Login unsuccesful')
     }
+  } catch (err) {
+    console.error(err)
+    toast('Something went wrong. Please try again.')
   }
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-pink-500 to-orange-400 flex justify-center items-center px-4">

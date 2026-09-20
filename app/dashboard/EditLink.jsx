@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 const EditLink = ({ links, userid }) => {
   const [editingLink, setEditingLink] = useState(null);
-
   const [text, setText] = useState("");
   const [url, setUrl] = useState("");
 
@@ -97,8 +96,7 @@ const EditLink = ({ links, userid }) => {
 
             {editingLink?.id === link.id ? (
 
-              /* ================= EDIT MODE ================= */
-
+ 
               <div>
 
                 <div className="mb-6 flex items-center justify-between">
@@ -175,12 +173,10 @@ const EditLink = ({ links, userid }) => {
 
             ) : (
 
-              /* ================= NORMAL MODE ================= */
-
+ 
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-                {/* Link Information */}
-                <div className="flex min-w-0 items-center gap-4">
+                 <div className="flex min-w-0 items-center gap-4">
 
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E9EFE8] text-xs font-bold tracking-wide text-[#527060]">
                     {String(index + 1).padStart(2, "0")}
@@ -199,8 +195,7 @@ const EditLink = ({ links, userid }) => {
                   </div>
                 </div>
 
-                {/* Actions */}
-                <div className="flex shrink-0 gap-2">
+                 <div className="flex shrink-0 gap-2">
 
                   <button
                     onClick={() => editHandle(link)}

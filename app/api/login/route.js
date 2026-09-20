@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 
  export  async function POST(request) {
-    const req= await request.json()
+    const req = await request.json()
 
     const results = await pool.query('select *  from userdata where email=$1',[req.email])
 

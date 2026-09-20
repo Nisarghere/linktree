@@ -121,11 +121,9 @@ const Navbar = () => {
                 href="/signup"
                 className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-black px-6 py-2.5 text-sm font-semibold text-white shadow-xl shadow-zinc-900/25 transition-all duration-300 hover:-translate-y-1 hover:scale-[1.03] hover:shadow-2xl hover:shadow-zinc-900/40 active:scale-95"
               >
-                {/* Shine */}
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
+                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 transition-transform duration-700 group-hover:translate-x-[180%]" />
 
-                {/* Glow */}
-                <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
+                 <span className="absolute inset-0 rounded-full bg-white/10 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
 
                 <span className="relative z-10 flex items-center gap-2">
                   Sign up free

@@ -101,16 +101,11 @@ const page = () => {
               </p>
             </div>
 
-            {/* <button
-              className="rounded-xl bg-emerald-600 px-6 py-3 text-white font-medium hover:bg-emerald-700 transition"
-            >
-              Edit Profile
-            </button> */}
+           
 
           </div>
 
-          {/* Stats */}
-
+ 
 
           {/* Information */}
           <div className="mt-10 rounded-2xl border border-zinc-200">
