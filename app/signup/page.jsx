@@ -56,78 +56,82 @@ export default function SignupPage() {
   }
 
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-r from-pink-300 to-orange-200 flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white/70 backdrop-blur-lg border border-orange-200 rounded-2xl p-8 shadow-2xl">
-          <h1 className="text-3xl font-bold text-red-700 text-center">
-            Create Account
-          </h1>
+ <>
+  <div className="min-h-screen bg-amber-50 flex items-center justify-center px-4">
+    <div className="w-full max-w-md bg-white border border-amber-100 rounded-2xl p-8 shadow-lg">
+      <h1 className="text-3xl font-bold text-slate-800 text-center">
+        Create Account
+      </h1>
 
-          <p className="text-orange-700 text-center mt-2">
-            Join and create your personal link page
-          </p>
+      <p className="text-slate-500 text-center mt-2">
+        Join and create your personal link page
+      </p>
 
-          <form onSubmit={sendData} className="mt-8 space-y-5">
-            <div>
-              <label className="block text-red-700 mb-2 font-medium">
-                Name
-              </label>
-              <input
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-                type="text"
-                placeholder="John Doe"
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white border border-orange-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
-              />
-            </div>
-
-            <div>
-              <label className="block text-red-700 mb-2 font-medium">
-                Email
-              </label>
-              <input
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
-                type="email"
-                placeholder="john@example.com"
-                required
-                className="w-full px-4 py-3 rounded-lg bg-white border border-orange-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
-              />
-            </div>
-
-            <div>
-              <label className="block text-red-700 mb-2 font-medium">
-                Password
-              </label>
-              <input
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
-                type="password"
-                placeholder="••••••••"
-                required
-                minLength={8}
-                className="w-full px-4 py-3 rounded-lg bg-white border border-orange-300 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-400"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:from-red-600 hover:to-orange-600 text-white py-3 rounded-lg font-semibold transition-all duration-300 shadow-md hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? 'Signing up...' : 'Sign Up'}
-            </button>
-          </form>
-
-          <p className="text-center text-orange-700 mt-6">
-            Already have an account?{" "}
-            <Link href='/login' className="text-red-600 cursor-pointer hover:text-red-700 font-semibold">
-              Login
-            </Link>
-          </p>
+      <form onSubmit={sendData} className="mt-8 space-y-5">
+        <div>
+          <label className="block text-slate-700 mb-2 font-medium">
+            Name
+          </label>
+          <input
+            value={name}
+            onChange={(e) => setname(e.target.value)}
+            type="text"
+            placeholder="John Doe"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-400"
+          />
         </div>
-      </div>
-    </>
+
+        <div>
+          <label className="block text-slate-700 mb-2 font-medium">
+            Email
+          </label>
+          <input
+            value={email}
+            onChange={(e) => setemail(e.target.value)}
+            type="email"
+            placeholder="john@example.com"
+            required
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-400"
+          />
+        </div>
+
+        <div>
+          <label className="block text-slate-700 mb-2 font-medium">
+            Password
+          </label>
+          <input
+            value={password}
+            onChange={(e) => setpassword(e.target.value)}
+            type="password"
+            placeholder="••••••••"
+            required
+            minLength={8}
+            className="w-full px-4 py-3 rounded-lg bg-white border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-400"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="w-full bg-amber-400 hover:bg-amber-500 text-slate-900 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? "Signing up..." : "Sign Up"}
+        </button>
+      </form>
+
+      <p className="text-center text-slate-500 mt-6">
+        Already have an account?{" "}
+        <Link
+          href="/login"
+          className="text-amber-600 cursor-pointer hover:text-amber-700 font-semibold"
+        >
+          Login
+        </Link>
+      </p>
+    </div>
+  </div>
+</>
+ 
   );
 }
