@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState, useEffect } from 'react'
-import { toast } from 'react-hot-toast' // adjust to whatever toast lib you're using on the login page
+import { toast } from 'react-toastify'
 
 export default function SignupPage() {
   const [name, setname] = useState('')
