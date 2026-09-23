@@ -33,10 +33,9 @@ const page = async () => {
       <div className="relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         {/* Header */}
         <header className="sticky top-4 z-50 pt-4">
-          <div className="mx-auto flex h-16 items-center justify-between rounded-2xl border border-[#2C463B]/20 bg-[#19352B] px-5 shadow-xl shadow-[#19352B]/10 sm:px-7">
-            {/* Logo */}
+          <div className="mx-auto flex h-16 items-center justify-between rounded-2xl border border-[#E5DFAE] bg-[#F6C945] px-5 shadow-lg shadow-[#19352B]/10 sm:px-7">
             <Link href="/" className="group flex items-center">
-              <div className="flex h-10 items-center justify-center rounded-xl bg-[#F5F3ED] px-3 transition-transform duration-200 group-hover:-translate-y-0.5">
+              <div className="flex h-10 items-center justify-center rounded-xl bg-[#19352B] px-3 transition-transform duration-200 group-hover:-translate-y-0.5">
                 <img
                   loading="eager"
                   src="https://cdn.prod.website-files.com/666255f7f2126f4e8cec6f8f/66634daccb34e6d65a41c76d_download.svg"
@@ -46,30 +45,25 @@ const page = async () => {
               </div>
             </Link>
 
-            {/* Page title */}
             <div className="hidden items-center gap-3 md:flex">
-              <span className="text-sm font-medium text-[#C7D2C9]">Add</span>
-              <span className="h-5 w-px bg-white/15" />
-              <span className="h-5 w-px bg-white/15" />
-
-              <span className="text-sm font-medium text-[#C7D2C9]">
+              <span className="text-sm font-semibold text-[#19352B]">
+                Dashboard
+              </span>
+              <span className="h-5 w-px bg-[#19352B]/20" />
+              <span className="text-sm font-medium text-[#19352B]/70">
                 Manage your links
               </span>
             </div>
 
-            {/* Status */}
-            <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2">
-              <span className="h-2 w-2 rounded-full bg-[#A8D5BA]" />
-
-              <span className="text-sm font-medium text-[#F5F3ED]">
-                Dashboard
+            <div className="flex items-center gap-2 rounded-full border border-[#19352B]/10 bg-white/40 px-4 py-2">
+              <span className="h-2 w-2 rounded-full bg-[#19352B]" />
+              <span className="text-sm font-semibold text-[#19352B]">
+                Active
               </span>
             </div>
           </div>
         </header>
-        {!data.handle && (
-            <Handle userid={userid} />
-        )}
+        {!data.handle && <Handle userid={userid} />}
 
         {/* Main */}
         <main className="pb-16 pt-8 sm:pt-10">
