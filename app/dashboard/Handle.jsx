@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import React, { useMemo, useState } from "react";
 import { motion } from "motion/react";
@@ -14,12 +14,6 @@ const Handle = ({ userid }) => {
   const [handle, setHandle] = useState("");
   const [isDisintegrating, setIsDisintegrating] = useState(false);
 
-  /*
-
-* Generate particles only once.
-* This prevents their positions from changing
-* every time React re-renders the component.
-  */
   const particles = useMemo(() => {
     return Array.from({ length: PARTICLE_COUNT }, (_, i) => {
       const isSparkle = Math.random() > 0.82;
@@ -27,28 +21,15 @@ const Handle = ({ userid }) => {
 
       return {
         id: i,
-
-        // Starting position inside the card
         left: Math.random() * 100,
         top: Math.random() * 100,
-
-        // Mostly upward movement with horizontal spread
         x: (Math.random() - 0.5) * 600,
         y: -(Math.random() * 420 + 60),
-
-        // Random rotation
         rotate: Math.random() * 900 - 450,
-
-        // Particle size
         size: isSparkle ? Math.random() * 4 + 3 : Math.random() * 2.5 + 1,
-
         isSparkle,
         isStreak,
-
-        // Different speeds create a natural breakup
         duration: Math.random() * 1.8 + 2.4,
-
-        // Particles don't disappear simultaneously
         delay: Math.random() * 0.8,
       };
     });
@@ -58,20 +39,10 @@ const Handle = ({ userid }) => {
     if (!handle.trim() || isDisintegrating) return;
 
     try {
-      // Only begin the animation after the
-      // database successfully saves the handle.
       await createHandle(handle, userid);
 
       setIsDisintegrating(true);
 
-      /*
-       * Refresh after the animation.
-       *
-       * Your page.js should check whether
-       * data.handle exists. Once refreshed,
-       * the Handle component will no longer
-       * be rendered.
-       */
       setTimeout(() => {
         router.refresh();
       }, 3900);
@@ -82,7 +53,6 @@ const Handle = ({ userid }) => {
 
   return (
     <section className="mb-6 mt-6 overflow-hidden rounded-3xl border border-[#D9DED6] bg-[#E9EFE8] p-6 shadow-sm sm:p-7">
-      {/* Animated Card */}
       <motion.div
         initial={{
           opacity: 1,
@@ -109,7 +79,6 @@ const Handle = ({ userid }) => {
         }}
         className="relative"
       >
-        {/* Main Content */}
         <motion.div
           animate={
             isDisintegrating
@@ -131,22 +100,21 @@ const Handle = ({ userid }) => {
           }}
           className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"
         >
-          {/* Left Side */}{" "}
           <div>
-            {/* Profile Badge */}{" "}
             <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-[#19352B]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#19352B]">
-              {" "}
               <span className="h-1.5 w-1.5 rounded-full bg-[#78927F]" />
-              Your profile{" "}
+              Your profile
             </div>
+
             <h2 className="text-xl font-semibold tracking-tight text-[#19352B]">
               Claim your handle
             </h2>
+
             <p className="mt-1.5 text-sm leading-6 text-[#647168]">
               Choose the username people will use to find your profile.
             </p>
           </div>
-          {/* Handle Input */}
+
           <div className="flex w-full max-w-xl flex-col gap-2 sm:flex-row">
             <div className="flex flex-1 items-center overflow-hidden rounded-xl border border-[#C9D3CA] bg-[#FDFCFA] shadow-sm focus-within:border-[#19352B] focus-within:ring-4 focus-within:ring-[#19352B]/5">
               <span className="whitespace-nowrap pl-4 text-sm font-medium text-[#89958C]">
@@ -173,9 +141,7 @@ const Handle = ({ userid }) => {
           </div>
         </motion.div>
 
-        {/* ========================================= */}
-        {/* ✨ SHIMMER WAVE                          */}
-        {/* ========================================= */}
+        {/* SHIMMER WAVE */}
 
         {isDisintegrating && (
           <motion.div
@@ -195,9 +161,7 @@ const Handle = ({ userid }) => {
           />
         )}
 
-        {/* ========================================= */}
-        {/* ✨ CARD FLASH                            */}
-        {/* ========================================= */}
+        {/* CARD FLASH */}
 
         {isDisintegrating && (
           <motion.div
@@ -216,9 +180,7 @@ const Handle = ({ userid }) => {
           />
         )}
 
-        {/* ========================================= */}
-        {/* ✨ PARTICLE FIELD                        */}
-        {/* ========================================= */}
+        {/* PARTICLE FIELD */}
 
         {isDisintegrating && (
           <div className="pointer-events-none absolute inset-0 z-40 overflow-visible">
@@ -256,7 +218,9 @@ const Handle = ({ userid }) => {
                   left: `${particle.left}%`,
                   top: `${particle.top}%`,
 
-                  width: particle.isStreak ? particle.size * 4 : particle.size,
+                  width: particle.isStreak
+                    ? particle.size * 4
+                    : particle.size,
 
                   height: particle.isStreak
                     ? particle.size * 0.7
@@ -278,50 +242,61 @@ const Handle = ({ userid }) => {
           </div>
         )}
 
-        {/* ========================================= */}
-        {/* ✨ CENTRAL ENERGY BURST                  */}
-        {/* ========================================= */}
+        {/* COLLAPSE WAVE */}
 
         {isDisintegrating && (
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.3,
-            }}
-            animate={{
-              opacity: [0, 0.9, 0],
-              scale: [0.3, 1.2, 2.8],
-            }}
-            transition={{
-              duration: 1.6,
-              delay: 0.35,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-30 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F1FFF5] blur-3xl"
-          />
-        )}
+          <>
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 0.2,
+              }}
+              animate={{
+                opacity: [0, 0.8, 0],
+                scale: [0.2, 1, 2.8],
+              }}
+              transition={{
+                duration: 1.5,
+                delay: 0.25,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="pointer-events-none absolute left-1/2 top-1/2 z-30 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[#F1FFF5]/80 shadow-[0_0_30px_#CDE5D3] blur-[1px]"
+            />
 
-        {/* ========================================= */}
-        {/* ✨ OUTER LIGHT RING                      */}
-        {/* ========================================= */}
+            <motion.div
+              initial={{
+                opacity: 0,
+                scale: 1.4,
+              }}
+              animate={{
+                opacity: [0, 0.5, 0],
+                scale: [1.4, 0.4, 0],
+              }}
+              transition={{
+                duration: 1.4,
+                delay: 0.45,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="pointer-events-none absolute left-1/2 top-1/2 z-30 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#F1FFF5]/40 blur-3xl"
+            />
 
-        {isDisintegrating && (
-          <motion.div
-            initial={{
-              opacity: 0,
-              scale: 0.4,
-            }}
-            animate={{
-              opacity: [0, 0.7, 0],
-              scale: [0.4, 1.8, 3],
-            }}
-            transition={{
-              duration: 1.8,
-              delay: 0.2,
-              ease: "easeOut",
-            }}
-            className="pointer-events-none absolute left-1/2 top-1/2 z-20 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/80 blur-sm"
-          />
+            <motion.div
+              initial={{
+                opacity: 0,
+                scaleX: 0,
+              }}
+              animate={{
+                opacity: [0, 0.8, 0],
+                scaleX: [0, 1, 1.8],
+              }}
+              transition={{
+                duration: 1.2,
+                delay: 0.35,
+                ease: "easeOut",
+              }}
+              className="pointer-events-none absolute left-1/2 top-1/2 z-30 h-px w-[70%] -translate-x-1/2 -translate-y-1/2 bg-white shadow-[0_0_15px_#FFFFFF,0_0_35px_#B7D8C0] blur-[1px]"
+            />
+          </>
         )}
       </motion.div>
     </section>
@@ -329,3 +304,5 @@ const Handle = ({ userid }) => {
 };
 
 export default Handle;
+
+One thing to note: I kept your **140 particles**, shimmer, flash, and the new wave. So this is a visual enhancement, not a change to your handle/database logic.
