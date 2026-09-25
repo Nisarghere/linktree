@@ -32,13 +32,7 @@ export async function getHandle(userId) {
 
   return result.rows[0].handle;
 }
-// export async function getLinksByUserId(userId) {
-//   const res = await pool.query("SELECT * FROM links WHERE user_id = $1", [
-//     userId,
-//   ]);
-
-//   return res.rows;
-// }
+ 
 
 export async function createUser(name, email, password) {
   const results = await pool.query(
