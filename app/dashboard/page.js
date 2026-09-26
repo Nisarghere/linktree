@@ -61,9 +61,7 @@ const page = async () => {
             </div>
           </div>
         </header>
-       This gives you a **floating white/sage glass-style header**, while
-        the dark green logo block keeps the branding visible without the yellow
-        competing with the page.
+        
         {!data.handle && <Handle userid={userid} />}
         {/* Main */}
         <main className="pb-16 pt-8 sm:pt-10">

@@ -305,4 +305,3 @@ const Handle = ({ userid }) => {
 
 export default Handle;
 
-One thing to note: I kept your **140 particles**, shimmer, flash, and the new wave. So this is a visual enhancement, not a change to your handle/database logic.
